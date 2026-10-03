@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolNest — Free Online Tools</title>
+<meta name="description" content="Fast, free online tools for text, calculations and everyday tasks. No signup required.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f8fb;color:#1f2937}
+a{text-decoration:none;color:inherit}.wrap{width:min(1100px,92%);margin:auto}
+header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:5}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:24px;font-weight:800}.logo span{color:#2563eb}
+.nav a{margin-left:20px;color:#4b5563}
+.hero{padding:65px 0;text-align:center;background:linear-gradient(180deg,#fff,#eef4ff)}
+.hero h1{font-size:clamp(34px,6vw,58px);margin:0 0 12px}.hero h1 span{color:#2563eb}.hero p{font-size:18px;color:#6b7280;max-width:650px;margin:0 auto 25px}
+.search{width:min(650px,100%);padding:15px 18px;border:1px solid #d1d5db;border-radius:12px;font-size:16px}
+.section{padding:42px 0}.section h2{margin:0 0 8px;font-size:32px}.sub{color:#6b7280;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.04)}
+.card h3{margin:0 0 8px}.card p{color:#6b7280;min-height:48px}.btn{display:inline-block;border:0;background:#2563eb;color:#fff;border-radius:10px;padding:10px 15px;cursor:pointer;font-weight:700}
+.tool{display:none;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:26px;margin-top:25px}.tool.active{display:block}.tool h2{margin-top:0}
+textarea,input,select{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;font:inherit;margin:8px 0 14px}
+textarea{min-height:180px;resize:vertical}.result{background:#f3f4f6;padding:15px;border-radius:10px;margin-top:14px}
+footer{border-top:1px solid #e5e7eb;background:#fff;padding:30px 0;color:#6b7280;margin-top:50px}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid{grid-template-columns:1fr}.nav a{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#"><span>Tool</span>Nest</a>
+<nav><a href="#tools">Tools</a><a href="#about">About</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<h1>Free <span>Online Tools</span></h1>
+<p>Simple, fast and useful tools for everyday work. No signup required.</p>
+<input id="search" class="search" placeholder="Search tools...">
+</div></section>
+
+<section id="tools" class="section"><div class="wrap">
+<h2>Popular Tools</h2><p class="sub">Choose a tool and use it instantly in your browser.</p>
+<div id="cards" class="grid">
+<article class="card" data-name="word counter text"><h3>Word Counter</h3><p>Count words, characters and sentences in your text.</p><button class="btn" onclick="openTool('word')">Open Tool</button></article>
+<article class="card" data-name="character counter text"><h3>Character Counter</h3><p>Count characters with and without spaces.</p><button class="btn" onclick="openTool('word')">Open Tool</button></article>
+<article class="card" data-name="case converter uppercase lowercase"><h3>Case Converter</h3><p>Convert text to upper, lower, title or sentence case.</p><button class="btn" onclick="openTool('case')">Open Tool</button></article>
+<article class="card" data-name="percentage calculator math"><h3>Percentage Calculator</h3><p>Calculate percentages quickly and easily.</p><button class="btn" onclick="openTool('percent')">Open Tool</button></article>
+<article class="card" data-name="age calculator date"><h3>Age Calculator</h3><p>Calculate age from date of birth.</p><button class="btn" onclick="openTool('age')">Open Tool</button></article>
+<article class="card" data-name="remove duplicate lines text"><h3>Duplicate Line Remover</h3><p>Remove repeated lines from any text.</p><button class="btn" onclick="openTool('duplicate')">Open Tool</button></article>
+</div>
+
+<div id="word" class="tool"><h2>Word & Character Counter</h2>
+<textarea id="wordText" placeholder="Type or paste your text here..."></textarea>
+<div class="result">Words: <b id="words">0</b> &nbsp; Characters: <b id="chars">0</b> &nbsp; Characters without spaces: <b id="charsNo">0</b> &nbsp; Sentences: <b id="sentences">0</b></div>
+</div>
+
+<div id="case" class="tool"><h2>Case Converter</h2>
+<textarea id="caseText" placeholder="Enter text..."></textarea>
+<select id="caseType"><option value="upper">UPPERCASE</option><option value="lower">lowercase</option><option value="title">Title Case</option><option value="sentence">Sentence case</option></select>
+<button class="btn" onclick="convertCase()">Convert</button>
+<textarea id="caseResult" placeholder="Result..." readonly></textarea>
+</div>
+
+<div id="percent" class="tool"><h2>Percentage Calculator</h2>
+<label>What is <input id="p1" type="number"> % of <input id="p2" type="number">?</label>
+<button class="btn" onclick="calcPercent()">Calculate</button>
+<div class="result" id="percentResult">Result will appear here.</div>
+</div>
+
+<div id="age" class="tool"><h2>Age Calculator</h2>
+<label>Date of birth <input id="dob" type="date"></label>
+<button class="btn" onclick="calcAge()">Calculate Age</button>
+<div class="result" id="ageResult">Result will appear here.</div>
+</div>
+
+<div id="duplicate" class="tool"><h2>Remove Duplicate Lines</h2>
+<textarea id="dupText" placeholder="Paste one item per line..."></textarea>
+<button class="btn" onclick="removeDuplicates()">Remove Duplicates</button>
+<textarea id="dupResult" placeholder="Result..." readonly></textarea>
+</div>
+</div></section>
+
+<section id="about" class="section"><div class="wrap">
+<h2>About ToolNest</h2><p class="sub">ToolNest provides browser-based utilities that are quick and easy to use. The tools on this page process your input locally in your browser.</p>
+</div></section>
+
+<footer><div class="wrap">© 2026 ToolNest · Free Online Tools</div></footer>
+
+<script>
+function openTool(id){document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}
+const wt=document.getElementById('wordText');wt.addEventListener('input',()=>{const t=wt.value;document.getElementById('words').textContent=(t.trim().match(/\S+/g)||[]).length;document.getElementById('chars').textContent=t.length;document.getElementById('charsNo').textContent=t.replace(/\s/g,'').length;document.getElementById('sentences').textContent=(t.match(/[.!?]+(?=\s|$)/g)||[]).length})
+function convertCase(){const t=document.getElementById('caseText').value,type=document.getElementById('caseType').value;let r=t;if(type==='upper')r=t.toUpperCase();if(type==='lower')r=t.toLowerCase();if(type==='title')r=t.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());if(type==='sentence')r=t.toLowerCase().replace(/(^\s*[a-z])|([.!?]\s+[a-z])/g,m=>m.toUpperCase());document.getElementById('caseResult').value=r}
+function calcPercent(){const a=parseFloat(document.getElementById('p1').value),b=parseFloat(document.getElementById('p2').value);document.getElementById('percentResult').textContent=isFinite(a)&&isFinite(b)?`${a}% of ${b} = ${b*a/100}`:'Please enter both numbers.'}
+function calcAge(){const v=document.getElementById('dob').value;if(!v){document.getElementById('ageResult').textContent='Please select your date of birth.';return}const d=new Date(v+'T00:00:00'),n=new Date();let y=n.getFullYear()-d.getFullYear(),m=n.getMonth()-d.getMonth(),day=n.getDate()-d.getDate();if(day<0){m--;day+=new Date(n.getFullYear(),n.getMonth(),0).getDate()}if(m<0){y--;m+=12}document.getElementById('ageResult').textContent=`You are ${y} years, ${m} months and ${day} days old.`}
+function removeDuplicates(){const lines=document.getElementById('dupText').value.split(/\r?\n/);const seen=new Set(),out=[];for(const l of lines){if(!seen.has(l)){seen.add(l);out.push(l)}}document.getElementById('dupResult').value=out.join('\n')}
+document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#cards .card').forEach(c=>c.style.display=c.dataset.name.includes(q)?'block':'none')})
+</script>
+</body>
+</html>
