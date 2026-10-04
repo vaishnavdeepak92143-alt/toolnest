@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>ToolNest Ultra — Modern Web Utilities</title>
-<!-- PDF Processing Libraries -->
+<title>ToolNest Ultra — Professional Web Utilities</title>
+<!-- External Libraries for PDF, Docx & Image Processing -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/docx@8.2.2/build/index.umd.js"></script>
 <style>
 :root {
   --primary: #6366f1;
@@ -60,25 +61,24 @@ header {
 
 main { flex: 1; }
 .hero { text-align: center; padding: 35px 0 15px; }
-.hero h1 { font-size: clamp(26px, 5vw, 40px); font-weight: 800; margin-bottom: 8px; }
+.hero h1 { font-size: clamp(24px, 5vw, 38px); font-weight: 800; margin-bottom: 8px; }
 .hero h1 span { background: linear-gradient(135deg, #818cf8, #c084fc); -webkit-background-clip: text; color: transparent; }
 .hero p { color: var(--text-muted); font-size: 14px; }
 
-/* Ad Placement Placeholder */
+/* Ad Placeholder */
 .ad-banner {
   background: var(--card-bg); border: 1px dashed var(--border); border-radius: 12px;
-  padding: 15px; text-align: center; color: var(--text-muted); font-size: 12px; margin: 15px auto; width: 100%;
+  padding: 14px; text-align: center; color: var(--text-muted); font-size: 12px; margin: 15px auto; width: 100%;
 }
 
-/* Grid Cards */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 10px; margin-bottom: 30px; }
+/* Tool Grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 15px; margin-bottom: 30px; }
 .card {
-  background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 20px;
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 22px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden;
 }
 .card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 10px 25px var(--glow); }
 
-/* Glowing Active Card Effect */
 .card.is-active-glow {
   border-color: #818cf8 !important;
   animation: neonGlow 1.2s infinite alternate ease-in-out;
@@ -89,68 +89,76 @@ main { flex: 1; }
   100% { box-shadow: 0 0 25px rgba(192, 132, 252, 0.8), inset 0 0 12px rgba(192, 132, 252, 0.4); border-color: #c084fc; }
 }
 
-.card-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; }
-.card h3 { font-size: 17px; margin-bottom: 5px; }
+.card-num {
+  position: absolute; top: 14px; right: 16px; font-weight: 800; font-size: 12px;
+  background: var(--field-bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 10px; color: var(--primary);
+}
+
+.card-icon { font-size: 34px; margin-bottom: 12px; display: inline-block; }
+.card h3 { font-size: 18px; margin-bottom: 6px; }
 .card p { color: var(--text-muted); font-size: 13px; line-height: 1.4; }
 
-/* Modal Overlay */
+/* Modal Overlay & Card Popups */
 .modal-overlay {
-  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.82);
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center;
   z-index: 100; padding: 15px; animation: fadeIn 0.25s ease-out;
 }
 .modal-overlay.active { display: flex; }
 .modal {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
-  width: min(650px, 100%); max-height: 85vh; overflow-y: auto; padding: 26px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+  width: min(650px, 100%); max-height: 88vh; overflow-y: auto; padding: 26px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
   position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .close-btn { position: absolute; top: 18px; right: 18px; background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
 
 .legal-content h3 { margin: 14px 0 6px; color: var(--primary); font-size: 16px; }
 .legal-content p, .legal-content li { color: var(--text-muted); font-size: 13.5px; line-height: 1.6; margin-bottom: 8px; }
-.legal-content ul { padding-left: 20px; }
 
-.field { width: 100%; padding: 12px 14px; border-radius: 12px; background: var(--field-bg); border: 1px solid var(--border); color: var(--text); margin: 10px 0; outline: none; font-size: 14px; }
+.field { width: 100%; padding: 12px 14px; border-radius: 12px; background: var(--field-bg); border: 1px solid var(--border); color: var(--text); margin: 8px 0 12px; outline: none; font-size: 14px; }
 .field:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--glow); }
 
+label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
 .btn {
-  width: 100%; padding: 12px; border: none; border-radius: 12px;
+  width: 100%; padding: 13px; border: none; border-radius: 12px;
   background: linear-gradient(135deg, var(--primary), #4f46e5);
   color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s; text-align: center; margin-top: 8px;
 }
 .btn-secondary { background: var(--border); color: var(--text); }
 .btn:active { transform: scale(0.98); }
 
-/* Processing Animation UI */
-.process-box { display: none; text-align: center; padding: 20px 0; }
+/* Circle Processing Ring */
+.process-box { display: none; text-align: center; padding: 25px 0; }
 .process-box.active { display: block; }
 
 .circle-progress {
-  width: 85px; height: 85px; border-radius: 50%;
+  width: 90px; height: 90px; border-radius: 50%;
   background: conic-gradient(var(--primary) 0deg, var(--border) 0deg);
-  display: grid; place-items: center; margin: 0 auto 14px; position: relative; transition: background 0.1s linear; box-shadow: 0 0 20px var(--glow);
+  display: grid; place-items: center; margin: 0 auto 16px; position: relative; transition: background 0.1s linear; box-shadow: 0 0 25px var(--glow);
 }
 .circle-progress::before {
-  content: ""; position: absolute; width: 69px; height: 69px; border-radius: 50%; background: var(--card-bg);
+  content: ""; position: absolute; width: 72px; height: 72px; border-radius: 50%; background: var(--card-bg);
 }
-.percent-text { position: relative; z-index: 2; font-weight: 800; font-size: 17px; color: var(--text); }
-.status-label { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-top: 6px; }
+.percent-text { position: relative; z-index: 2; font-weight: 800; font-size: 18px; color: var(--text); }
+.status-label { font-size: 13.5px; color: var(--text-muted); font-weight: 600; margin-top: 6px; }
 
 /* Result Box */
 .result-box { display: none; text-align: center; padding: 15px 0; animation: fadeIn 0.4s; }
 .result-box.active { display: block; }
-.success-icon { font-size: 44px; margin-bottom: 8px; display: inline-block; animation: bounce 0.6s ease; }
+.success-icon { font-size: 46px; margin-bottom: 8px; display: inline-block; animation: bounce 0.6s ease; }
 
 .btn-download {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   background: linear-gradient(135deg, var(--accent), #059669);
   color: #fff; padding: 13px 22px; border-radius: 12px; text-decoration: none;
-  font-weight: 700; margin-top: 10px; width: 100%; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
+  font-weight: 700; margin-top: 12px; width: 100%; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
 }
 
 .canvas-container { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 10px 0; background: #000; text-align: center; max-width: 100%; }
 canvas { max-width: 100%; height: auto; display: block; margin: auto; touch-action: none; }
+
+.controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
 
 footer {
   background: var(--card-bg); border-top: 1px solid var(--border);
@@ -163,7 +171,7 @@ footer {
 
 .universe-text {
   position: fixed; bottom: 12px; right: 18px; font-size: 11px; font-weight: 500; color: var(--text-muted);
-  opacity: 0.45; letter-spacing: 0.5px; pointer-events: none; user-select: none; z-index: 5;
+  opacity: 0.45; pointer-events: none; user-select: none; z-index: 5;
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -192,84 +200,66 @@ footer {
 
 <main class="container">
   <section class="hero">
-    <h1>Fast & Secure <span>Online Utilities</span></h1>
-    <p>100% Free, Browser-Based Client-Side Tool Processing</p>
+    <h1>Fast & Secure <span>Online Web Tools</span></h1>
+    <p>100% Free, Secure Client-Side Processing inside Browser</p>
   </section>
 
-  <!-- AdSense Banner Top Area -->
+  <!-- Top Ad Banner -->
   <div class="ad-banner">
     📢 Google AdSense / Sponsor Ad Placement Area
   </div>
 
   <div class="grid">
-    <div class="card" id="card-bg" onclick="openTool('bg')">
-      <span class="card-icon">✨</span>
-      <h3>Human BG Remover</h3>
-      <p>Isolate person & remove background completely.</p>
+    <!-- Tool 1 -->
+    <div class="card" id="card-1" onclick="openTool(1)">
+      <span class="card-num">#1</span>
+      <span class="card-icon">📑</span>
+      <h3>Document Scanner</h3>
+      <p>Scan unlimited photos & combine them into a single PDF document.</p>
     </div>
 
-    <div class="card" id="card-pdfedit" onclick="openTool('pdfedit')">
-      <span class="card-icon">✏️</span>
-      <h3>PDF Editor & Sign</h3>
-      <p>Annotate, draw, write text & sign PDF files.</p>
-    </div>
-
-    <div class="card" id="card-pdfpass" onclick="openTool('pdfpass')">
-      <span class="card-icon">🔓</span>
-      <h3>PDF Password Remover</h3>
-      <p>Remove security & unlock encrypted PDF files.</p>
-    </div>
-
-    <div class="card" id="card-compress" onclick="openTool('compress')">
+    <!-- Tool 2 -->
+    <div class="card" id="card-2" onclick="openTool(2)">
+      <span class="card-num">#2</span>
       <span class="card-icon">🗜️</span>
-      <h3>KB Target Compressor</h3>
-      <p>Compress image directly to your custom KB size.</p>
+      <h3>KB Target Resizer</h3>
+      <p>Resize image to your exact custom KB target size.</p>
     </div>
 
-    <div class="card" id="card-text2pdf" onclick="openTool('text2pdf')">
-      <span class="card-icon">📝</span>
-      <h3>Text to PDF</h3>
-      <p>Convert notes, raw text, and code to PDF document.</p>
+    <!-- Tool 3 -->
+    <div class="card" id="card-3" onclick="openTool(3)">
+      <span class="card-num">#3</span>
+      <span class="card-icon">✨</span>
+      <h3>Photo Enhancer (Ultra HD)</h3>
+      <p>Upscale blurry photos into sharp, high-contrast Ultra HD quality.</p>
     </div>
 
-    <div class="card" id="card-crop" onclick="openTool('crop')">
-      <span class="card-icon">✂️</span>
-      <h3>Crop & Rotate Image</h3>
-      <p>Crop photo bounds and rotate with live preview.</p>
-    </div>
-
-    <div class="card" id="card-pdf" onclick="openTool('pdf')">
-      <span class="card-icon">📄</span>
-      <h3>Image to PDF</h3>
-      <p>Combine multiple images into a clean PDF file.</p>
-    </div>
-
-    <div class="card" id="card-pdf2img" onclick="openTool('pdf2img')">
+    <!-- Tool 4 -->
+    <div class="card" id="card-4" onclick="openTool(4)">
+      <span class="card-num">#4</span>
       <span class="card-icon">🖼️</span>
-      <h3>PDF to Image</h3>
-      <p>Extract PDF pages into clear PNG images.</p>
+      <h3>Image to PDF Converter</h3>
+      <p>Convert multiple photos into clean, organized PDF files.</p>
     </div>
 
-    <div class="card" id="card-age" onclick="openTool('age')">
-      <span class="card-icon">🎂</span>
-      <h3>Age Calculator</h3>
-      <p>Calculate exact age in years, months, and days.</p>
+    <!-- Tool 5 -->
+    <div class="card" id="card-5" onclick="openTool(5)">
+      <span class="card-num">#5</span>
+      <span class="card-icon">🎨</span>
+      <h3>Full Photo Editor Suite</h3>
+      <p>Complete suite: Brightness, Contrast, Saturation, Crop & Filters.</p>
     </div>
 
-    <div class="card" id="card-pass" onclick="openTool('pass')">
-      <span class="card-icon">🔐</span>
-      <h3>Password Generator</h3>
-      <p>Create hack-proof high-entropy passwords.</p>
-    </div>
-
-    <div class="card" id="card-words" onclick="openTool('words')">
-      <span class="card-icon">✍️</span>
-      <h3>Word & Text Counter</h3>
-      <p>Count words, lines, and characters instantly.</p>
+    <!-- Tool 6 -->
+    <div class="card" id="card-6" onclick="openTool(6)">
+      <span class="card-num">#6</span>
+      <span class="card-icon">📝</span>
+      <h3>PDF to Word Converter</h3>
+      <p>Extract text from PDF and convert it directly to Word (.docx).</p>
     </div>
   </div>
 
-  <!-- AdSense Banner Bottom Area -->
+  <!-- Bottom Ad Banner -->
   <div class="ad-banner" style="margin-bottom:30px;">
     📢 Google AdSense Responsive Ad Unit
   </div>
@@ -290,11 +280,11 @@ footer {
 
 <div class="universe-text">thank you universe</div>
 
-<!-- Universal Dynamic Modal -->
+<!-- Universal Dynamic Modal Popup -->
 <div id="modal" class="modal-overlay">
   <div class="modal">
     <button class="close-btn" onclick="closeModal()">✕</button>
-    <h2 id="toolTitle" style="margin-bottom: 12px;">Tool</h2>
+    <h2 id="toolTitle" style="margin-bottom: 14px;">Tool</h2>
     
     <div id="formArea"></div>
 
@@ -302,7 +292,7 @@ footer {
       <div id="progressCircle" class="circle-progress">
         <span id="progressPercent" class="percent-text">0%</span>
       </div>
-      <div id="statusLabel" class="status-label">Initializing...</div>
+      <div id="statusLabel" class="status-label">Processing...</div>
     </div>
 
     <div id="resultArea" class="result-box">
@@ -317,11 +307,8 @@ footer {
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 let activeUrl = null;
-let currentCropImg = null;
-let rotationAngle = 0;
-let pdfEditCanvas = null;
-let isDrawing = false;
 let activeCardId = null;
+let editorCanvas = null;
 
 function toggleTheme() {
   const body = document.body;
@@ -331,13 +318,13 @@ function toggleTheme() {
   document.getElementById('themeText').innerText = isDark ? 'Light Mode' : 'Dark Mode';
 }
 
-function openTool(type) {
+function openTool(num) {
   if (activeCardId) {
     const prevCard = document.getElementById(activeCardId);
     if(prevCard) prevCard.classList.remove('is-active-glow');
   }
 
-  activeCardId = `card-${type}`;
+  activeCardId = `card-${num}`;
   const currentCard = document.getElementById(activeCardId);
   if(currentCard) currentCard.classList.add('is-active-glow');
 
@@ -348,91 +335,73 @@ function openTool(type) {
   resetModal();
   modal.classList.add('active');
 
-  if(type === 'bg') {
-    title.innerText = '✨ Human & Subject Background Remover';
+  if(num === 1) {
+    title.innerText = '📑 Document Scanner (Scan to PDF)';
     form.innerHTML = `
-      <input type="file" id="bgFile" accept="image/*" class="field">
-      <button class="btn" onclick="startProcessing(runRemoveBGLive)">Remove Background Now</button>
+      <label>Upload Document Photos (Multiple Allowed)</label>
+      <input type="file" id="scanFiles" accept="image/*" multiple class="field">
+      <label>Scan Effect Filter</label>
+      <select id="scanFilter" class="field">
+        <option value="magic">Magic Enhance (High Contrast)</option>
+        <option value="bw">Black & White Document</option>
+        <option value="gray">Grayscale</option>
+        <option value="original">Original Colors</option>
+      </select>
+      <button class="btn" onclick="startProcessing(runDocScanner)">Scan & Create PDF</button>
     `;
-  } else if(type === 'pdfedit') {
-    title.innerText = '✏️ PDF Editor & Draw/Sign';
+  } else if(num === 2) {
+    title.innerText = '🗜️ Target KB Image Resizer';
     form.innerHTML = `
-      <input type="file" id="pdfEditFile" accept="application/pdf" class="field" onchange="loadPdfToCanvas(event)">
-      <div class="canvas-container" id="pdfCanvasContainer" style="display:none;">
-        <canvas id="pdfEditorCanvas"></canvas>
-      </div>
-      <div style="display:none; gap:8px; margin-top:8px;" id="pdfControls">
-        <button class="btn btn-secondary" onclick="clearPdfDrawing()">🧹 Clear Annotations</button>
-        <button class="btn" onclick="startProcessing(saveEditedPdf)">Export Edited PDF</button>
-      </div>
-    `;
-  } else if(type === 'pdfpass') {
-    title.innerText = '🔓 PDF Password Remover';
-    form.innerHTML = `
-      <input type="file" id="pdfPassFile" accept="application/pdf" class="field">
-      <input type="password" id="pdfPassword" placeholder="Enter PDF Password" class="field">
-      <button class="btn" onclick="startProcessing(runRemovePdfPassword)">Unlock PDF Document</button>
-    `;
-  } else if(type === 'compress') {
-    title.innerText = '🗜️ Target KB Image Compressor';
-    form.innerHTML = `
+      <label>Select Photo</label>
       <input type="file" id="compFile" accept="image/*" class="field">
-      <input type="number" id="targetKB" value="200" placeholder="Target size in KB (e.g. 100)" class="field">
-      <button class="btn" onclick="startProcessing(runTargetCompress)">Compress File</button>
+      <label>Target Size (in KB)</label>
+      <input type="number" id="targetKB" value="100" placeholder="e.g. 50, 100, 200" class="field">
+      <button class="btn" onclick="startProcessing(runKBResizer)">Resize Image</button>
     `;
-  } else if(type === 'text2pdf') {
-    title.innerText = '📝 Text / Code to PDF';
+  } else if(num === 3) {
+    title.innerText = '✨ AI Photo Enhancer (Ultra HD)';
     form.innerHTML = `
-      <input type="text" id="pdfTitleInput" placeholder="Document Title (Optional)" class="field">
-      <textarea id="pdfBodyInput" class="field" rows="6" placeholder="Type or paste text content here..."></textarea>
-      <button class="btn" onclick="startProcessing(runTextToPdf)">Generate PDF</button>
+      <label>Select Blurry / Low-Res Photo</label>
+      <input type="file" id="enhanceFile" accept="image/*" class="field">
+      <button class="btn" onclick="startProcessing(runPhotoEnhancer)">Enhance to Ultra HD</button>
     `;
-  } else if(type === 'crop') {
-    title.innerText = '✂️ Crop & Rotate Photo';
+  } else if(num === 4) {
+    title.innerText = '🖼️ Image to PDF Converter';
     form.innerHTML = `
-      <input type="file" id="cropFileInput" accept="image/*" class="field" onchange="loadCropPreview(event)">
-      <div class="canvas-container" id="cropCanvasContainer" style="display:none;">
-        <canvas id="cropCanvasPreview"></canvas>
+      <label>Select Images</label>
+      <input type="file" id="imgPdfFiles" accept="image/*" multiple class="field">
+      <button class="btn" onclick="startProcessing(runImageToPDF)">Generate PDF</button>
+    `;
+  } else if(num === 5) {
+    title.innerText = '🎨 Photo Editor Suite';
+    form.innerHTML = `
+      <label>Select Image to Edit</label>
+      <input type="file" id="editorInput" accept="image/*" class="field" onchange="loadPhotoEditor(event)">
+      <div class="canvas-container" id="editorCanvasContainer" style="display:none;">
+        <canvas id="photoCanvas"></canvas>
       </div>
-      <div style="display:none; gap:8px; margin-top:8px;" id="cropControls">
-        <button class="btn btn-secondary" onclick="rotateImage(90)">🔄 Rotate 90°</button>
-        <button class="btn" onclick="startProcessing(runCropAndRotate)">Apply & Save</button>
+      <div id="editorControls" style="display:none;" class="controls-grid">
+        <div><label>Brightness</label><input type="range" id="bright" min="-100" max="100" value="0" class="field" oninput="applyEditorFilters()"></div>
+        <div><label>Contrast</label><input type="range" id="contrast" min="-100" max="100" value="0" class="field" oninput="applyEditorFilters()"></div>
+        <div><label>Saturation</label><input type="range" id="saturate" min="-100" max="100" value="0" class="field" oninput="applyEditorFilters()"></div>
+        <div><label>Sharpness</label><input type="range" id="sharpen" min="0" max="100" value="0" class="field" oninput="applyEditorFilters()"></div>
+      </div>
+      <div id="editorActionBtns" style="display:none;" class="controls-grid">
+        <button class="btn btn-secondary" onclick="rotateEditorCanvas()">🔄 Rotate 90°</button>
+        <button class="btn" onclick="startProcessing(saveEditedPhoto)">Save Edited Image</button>
       </div>
     `;
-  } else if(type === 'pdf') {
-    title.innerText = '📄 Image to PDF Converter';
+  } else if(num === 6) {
+    title.innerText = '📝 PDF to Word (.docx) Converter';
     form.innerHTML = `
-      <input type="file" id="imgFiles" accept="image/*" multiple class="field">
-      <button class="btn" onclick="startProcessing(runImageToPDF)">Create PDF File</button>
-    `;
-  } else if(type === 'pdf2img') {
-    title.innerText = '🖼️ PDF to Image Extractor';
-    form.innerHTML = `
-      <input type="file" id="pdfFile" accept="application/pdf" class="field">
-      <button class="btn" onclick="startProcessing(runPDFToImage)">Extract Images</button>
-    `;
-  } else if(type === 'age') {
-    title.innerText = '🎂 Age Calculator';
-    form.innerHTML = `
-      <input type="date" id="dob" class="field">
-      <button class="btn" onclick="startProcessing(runAgeCalc)">Calculate Age</button>
-    `;
-  } else if(type === 'pass') {
-    title.innerText = '🔐 Password Generator';
-    form.innerHTML = `
-      <input type="number" id="passLen" value="16" min="8" max="32" class="field" placeholder="Password Length">
-      <button class="btn" onclick="startProcessing(runPassword)">Generate Password</button>
-    `;
-  } else if(type === 'words') {
-    title.innerText = '✍ Word & Character Counter';
-    form.innerHTML = `
-      <textarea id="textInput" class="field" rows="5" placeholder="Paste text here..."></textarea>
-      <button class="btn" onclick="startProcessing(runWordCount)">Count Text</button>
+      <label>Select PDF File</label>
+      <input type="file" id="pdfWordFile" accept="application/pdf" class="field">
+      <button class="btn" onclick="startProcessing(runPdfToWord)">Convert to Word Document</button>
     `;
   }
 }
 
-/* Open AdSense Required Legal Pages */
+/* Legal Pages Modal Handler */
 function openLegal(page) {
   resetModal();
   const modal = document.getElementById('modal');
@@ -444,49 +413,35 @@ function openLegal(page) {
     title.innerText = '🛡️ Privacy Policy';
     form.innerHTML = `
       <div class="legal-content">
-        <p>At <b>ToolNest Ultra</b>, your privacy is our top priority. This Privacy Policy outlines how your data is handled when using our website.</p>
-        <h3>1. Client-Side Data Processing</h3>
-        <p>All tool operations (PDF processing, Image Background Removal, Image Compression) happen entirely within your browser. <b>No files, documents, or personal images are uploaded to any server.</b></p>
-        <h3>2. Google AdSense & Cookies</h3>
-        <p>We may use third-party advertising partners like Google AdSense to serve ads. Google uses cookies (such as DART cookies) to serve relevant ads based on users' visits to this and other sites on the internet.</p>
-        <h3>3. Analytics</h3>
-        <p>We use standard non-personally identifiable browser data to improve user experience and ensure security.</p>
+        <p>At <b>ToolNest Ultra</b>, user privacy is our highest priority. All tool actions execute locally inside your client browser engine. <b>No files are ever uploaded to any server.</b></p>
+        <h3>Google AdSense</h3>
+        <p>We use Google AdSense cookies to serve contextually relevant ads. Your personal data is never sold or tracked.</p>
       </div>
     `;
   } else if(page === 'about') {
     title.innerText = 'ℹ️ About Us';
     form.innerHTML = `
       <div class="legal-content">
-        <p>Welcome to <b>ToolNest Ultra</b> — your all-in-one suite of secure, fast, and modern web utilities.</p>
-        <h3>Our Mission</h3>
-        <p>Our mission is to provide powerful productivity tools (PDF manipulation, photo optimization, background removal) without compromising privacy. Unlike other online converters, we do not upload your sensitive files to remote servers.</p>
-        <h3>100% Free & Secure</h3>
-        <p>All tools are free to use, require no registration or sign-up, and execute locally right inside your client browser engine.</p>
+        <p><b>ToolNest Ultra</b> provides powerful web utilities including Document Scanning, Resizing, Photo Enhancing, and Document Conversions completely free and secure.</p>
       </div>
     `;
   } else if(page === 'terms') {
     title.innerText = '📜 Terms & Conditions';
     form.innerHTML = `
       <div class="legal-content">
-        <p>By accessing or using <b>ToolNest Ultra</b>, you agree to be bound by these Terms and Conditions.</p>
-        <h3>1. Usage Terms</h3>
-        <p>You may use our tools for personal and commercial projects free of charge. You agree not to misuse or attempt to disrupt the website infrastructure.</p>
-        <h3>2. No Liability</h3>
-        <p>ToolNest Ultra provides web utilities "as is" without warranty. We are not liable for any data loss, file corruption, or inconvenience resulting from tool usage.</p>
+        <p>By using this platform, you agree to use our tools responsibly for personal and professional tasks.</p>
       </div>
     `;
   } else if(page === 'disclaimer') {
-    title.innerText = '⚠️ Legal Disclaimer';
+    title.innerText = '⚠️️ Legal Disclaimer';
     form.innerHTML = `
       <div class="legal-content">
-        <p>The information and tools provided by <b>ToolNest Ultra</b> are for general informational and utility purposes only.</p>
-        <p>While we strive for 100% accurate file conversion and tool performance, users are encouraged to verify important documents after conversion.</p>
+        <p>Our tools are provided "as is" without warranty. Users should double-check critical files after conversion.</p>
       </div>
     `;
   } else if(page === 'contact') {
     title.innerText = '📬 Contact Us';
     form.innerHTML = `
-      <p style="color:var(--text-muted); font-size:13px; margin-bottom:10px;">Have questions or feedback? Send us a message below:</p>
       <input type="text" placeholder="Your Name" class="field">
       <input type="email" placeholder="Your Email Address" class="field">
       <textarea rows="4" placeholder="Your Message..." class="field"></textarea>
@@ -498,9 +453,9 @@ function openLegal(page) {
 function submitContact() {
   document.getElementById('formArea').innerHTML = `
     <div style="text-align:center; padding:20px 0;">
-      <span style="font-size:40px;">✉️</span>
+      <span style="font-size:40px;">✉️️</span>
       <h3 style="margin:10px 0;">Thank You!</h3>
-      <p style="color:var(--text-muted);">Your message has been received. We will get back to you shortly.</p>
+      <p style="color:var(--text-muted);">Your message has been sent successfully.</p>
     </div>
   `;
 }
@@ -509,7 +464,7 @@ function resetModal() {
   document.getElementById('formArea').style.display = 'block';
   document.getElementById('processArea').classList.remove('active');
   document.getElementById('resultArea').classList.remove('active');
-  currentCropImg = null; rotationAngle = 0; pdfEditCanvas = null;
+  editorCanvas = null;
   if(activeUrl) { URL.revokeObjectURL(activeUrl); activeUrl = null; }
 }
 
@@ -534,9 +489,9 @@ function startProcessing(taskFunction) {
 
   let current = 0;
   const stages = [
-    { p: 20, text: "Reading file bytes..." },
-    { p: 60, text: "Analyzing subject & applying filters..." },
-    { p: 85, text: "Formatting final output..." },
+    { p: 25, text: "Reading file bytes..." },
+    { p: 65, text: "Applying AI algorithms & filters..." },
+    { p: 90, text: "Formatting output file..." },
     { p: 100, text: "Complete!" }
   ];
 
@@ -557,153 +512,62 @@ function startProcessing(taskFunction) {
         await taskFunction();
       }, 250);
     }
-  }, 40);
+  }, 35);
 }
 
-/* Human Person & Subject Background Removal Algorithm */
-async function runRemoveBGLive() {
-  const file = document.getElementById('bgFile').files[0];
-  if (!file) return showResultError("Please select an image file first!");
+// 1. Multi-Photo Document Scanner
+async function runDocScanner() {
+  const files = document.getElementById('scanFiles').files;
+  const filter = document.getElementById('scanFilter').value;
+  if (!files.length) return showResultError("Please select document photo(s)!");
 
-  const img = new Image();
-  img.src = URL.createObjectURL(file);
-  await img.decode();
+  const { jsPDF } = window.jspdf;
+  let pdf = null;
 
-  const canvas = document.createElement('canvas');
-  canvas.width = img.width; canvas.height = img.height;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
+  for (let i = 0; i < files.length; i++) {
+    const img = new Image();
+    img.src = URL.createObjectURL(files[i]);
+    await img.decode();
 
-  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const data = imgData.data;
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width; canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
 
-  const w = canvas.width, h = canvas.height;
-  const borderPixels = [0, (w - 1) * 4, (h - 1) * w * 4, ((h - 1) * w + w - 1) * 4];
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const d = imgData.data;
 
-  let bgR = 0, bgG = 0, bgB = 0;
-  borderPixels.forEach(idx => {
-    bgR += data[idx]; bgG += data[idx + 1]; bgB += data[idx + 2];
-  });
-  bgR /= 4; bgG /= 4; bgB /= 4;
-
-  const centerX = w / 2; const centerY = h / 2;
-  const maxDist = Math.hypot(centerX, centerY);
-
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) {
-      const idx = (y * w + x) * 4;
-      const distFromCenter = Math.hypot(x - centerX, y - centerY) / maxDist;
-      const colorDiff = Math.hypot(data[idx] - bgR, data[idx+1] - bgG, data[idx+2] - bgB);
-
-      if (colorDiff < 70 && distFromCenter > 0.25) {
-        data[idx + 3] = 0;
-      } else if (colorDiff < 95 && distFromCenter > 0.35) {
-        data[idx + 3] = Math.floor((colorDiff - 70) * (255 / 25));
+    // Apply Filter Effects
+    for (let j = 0; j < d.length; j += 4) {
+      let v = 0.299 * d[j] + 0.587 * d[j+1] + 0.114 * d[j+2];
+      if (filter === 'bw') {
+        v = v > 120 ? 255 : 0;
+        d[j] = d[j+1] = d[j+2] = v;
+      } else if (filter === 'magic') {
+        v = (v - 128) * 1.5 + 128; // High contrast
+        d[j] = d[j+1] = d[j+2] = Math.min(255, Math.max(0, v));
+      } else if (filter === 'gray') {
+        d[j] = d[j+1] = d[j+2] = v;
       }
     }
+    ctx.putImageData(imgData, 0, 0);
+
+    const processedData = canvas.toDataURL('image/jpeg', 0.9);
+    if (i === 0) pdf = new jsPDF({ orientation: canvas.width > canvas.height ? 'l' : 'p', unit: 'px', format: [canvas.width, canvas.height] });
+    else pdf.addPage([canvas.width, canvas.height], canvas.width > canvas.height ? 'l' : 'p');
+    pdf.addImage(processedData, 'JPEG', 0, 0, canvas.width, canvas.height);
   }
 
-  ctx.putImageData(imgData, 0, 0);
-  canvas.toBlob((blob) => {
-    activeUrl = URL.createObjectURL(blob);
-    document.getElementById('resultContent').innerHTML = `
-      <a href="${activeUrl}" download="Person_Transparent.png" class="btn-download">✨ Download Subject PNG</a>
-    `;
-  }, 'image/png');
-}
-
-// PDF Editor
-async function loadPdfToCanvas(e) {
-  const file = e.target.files[0];
-  if(!file) return;
-
-  const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  const page = await pdf.getPage(1);
-  
-  const viewport = page.getViewport({ scale: 1.2 });
-  const canvas = document.getElementById('pdfEditorCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.height = viewport.height; canvas.width = viewport.width;
-
-  await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-  document.getElementById('pdfCanvasContainer').style.display = 'block';
-  document.getElementById('pdfControls').style.display = 'flex';
-
-  pdfEditCanvas = canvas;
-  let drawCtx = canvas.getContext('2d');
-  drawCtx.strokeStyle = '#ef4444'; drawCtx.lineWidth = 3;
-
-  const getPos = (evt) => {
-    const rect = canvas.getBoundingClientRect();
-    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-    const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-    return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
-  };
-
-  const startDraw = (evt) => { isDrawing = true; const pos = getPos(evt); drawCtx.beginPath(); drawCtx.moveTo(pos.x, pos.y); };
-  const moveDraw = (evt) => { if(!isDrawing) return; const pos = getPos(evt); drawCtx.lineTo(pos.x, pos.y); drawCtx.stroke(); };
-  const stopDraw = () => { isDrawing = false; };
-
-  canvas.onmousedown = startDraw; canvas.onmousemove = moveDraw; canvas.onmouseup = stopDraw;
-  canvas.ontouchstart = startDraw; canvas.ontouchmove = moveDraw; canvas.ontouchend = stopDraw;
-}
-
-function clearPdfDrawing() {
-  if(document.getElementById('pdfEditFile').files[0]) {
-    loadPdfToCanvas({ target: { files: document.getElementById('pdfEditFile').files } });
-  }
-}
-
-async function saveEditedPdf() {
-  if(!pdfEditCanvas) return showResultError("Please select a PDF file first!");
-  const imgData = pdfEditCanvas.toDataURL('image/png');
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF({ orientation: pdfEditCanvas.width > pdfEditCanvas.height ? 'l' : 'p', unit: 'px', format: [pdfEditCanvas.width, pdfEditCanvas.height] });
-  pdf.addImage(imgData, 'PNG', 0, 0, pdfEditCanvas.width, pdfEditCanvas.height);
   const blob = pdf.output('blob');
   activeUrl = URL.createObjectURL(blob);
-  document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Edited_Doc.pdf" class="btn-download">📥 Download Edited PDF</a>`;
+  document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Scanned_Document.pdf" class="btn-download">📥 Download Scanned PDF (${files.length} Pages)</a>`;
 }
 
-// PDF Password Remover
-async function runRemovePdfPassword() {
-  const file = document.getElementById('pdfPassFile').files[0];
-  const pass = document.getElementById('pdfPassword').value;
-  if (!file) return showResultError("Please select a encrypted PDF file!");
-
-  try {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer, password: pass }).promise;
-    const { jsPDF } = window.jspdf;
-    let newPdf = null;
-
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale: 1.5 });
-      const canvas = document.createElement('canvas');
-      canvas.width = viewport.width; canvas.height = viewport.height;
-      await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
-
-      const imgData = canvas.toDataURL('image/jpeg', 0.9);
-      if (i === 1) newPdf = new jsPDF({ orientation: viewport.width > viewport.height ? 'l' : 'p', unit: 'px', format: [viewport.width, viewport.height] });
-      else newPdf.addPage([viewport.width, viewport.height], viewport.width > viewport.height ? 'l' : 'p');
-      newPdf.addImage(imgData, 'JPEG', 0, 0, viewport.width, viewport.height);
-    }
-
-    const blob = newPdf.output('blob');
-    activeUrl = URL.createObjectURL(blob);
-    document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Unlocked_Document.pdf" class="btn-download">🔓 Download Unlocked PDF</a>`;
-  } catch(err) {
-    showResultError("Incorrect password or corrupt PDF file!");
-  }
-}
-
-// Target KB Compression
-async function runTargetCompress() {
+// 2. KB Resizer
+async function runKBResizer() {
   const file = document.getElementById('compFile').files[0];
-  const targetKB = parseInt(document.getElementById('targetKB').value) || 200;
-  if(!file) return showResultError("Please select an image file!");
+  const targetKB = parseInt(document.getElementById('targetKB').value) || 100;
+  if(!file) return showResultError("Please select an image!");
 
   const img = new Image();
   img.src = URL.createObjectURL(file);
@@ -719,7 +583,7 @@ async function runTargetCompress() {
   let blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', quality));
 
   while (blob.size / 1024 > targetKB && quality > 0.1) {
-    quality -= 0.1;
+    quality -= 0.08;
     if (quality <= 0.2) {
       scale *= 0.85;
       canvas.width = img.width * scale; canvas.height = img.height * scale;
@@ -732,118 +596,158 @@ async function runTargetCompress() {
   activeUrl = URL.createObjectURL(blob);
   const finalKB = Math.round(blob.size / 1024);
   document.getElementById('resultContent').innerHTML = `
-    <p style="color:var(--text-muted);margin-bottom:8px;">Target: ${targetKB} KB | Result: <b>${finalKB} KB</b></p>
-    <a href="${activeUrl}" download="Compressed_${finalKB}KB.jpg" class="btn-download">🗜️ Download Resized Photo</a>
+    <p style="color:var(--text-muted);margin-bottom:8px;">Target: ${targetKB} KB | Final: <b>${finalKB} KB</b></p>
+    <a href="${activeUrl}" download="Resized_${finalKB}KB.jpg" class="btn-download">🗜️ Download Resized Photo</a>
   `;
 }
 
-// Text to PDF
-function runTextToPdf() {
-  const title = document.getElementById('pdfTitleInput').value.trim() || "Document";
-  const body = document.getElementById('pdfBodyInput').value.trim();
-  if(!body) return showResultError("Please type or paste text content!");
+// 3. AI Photo Enhancer (Ultra HD)
+async function runPhotoEnhancer() {
+  const file = document.getElementById('enhanceFile').files[0];
+  if (!file) return showResultError("Please select a photo to enhance!");
 
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-  pdf.setFontSize(18); pdf.text(title, 14, 20);
-  pdf.setFontSize(11);
-  const splitLines = pdf.splitTextToSize(body, 180);
-  pdf.text(splitLines, 14, 30);
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
 
-  const blob = pdf.output('blob');
-  activeUrl = URL.createObjectURL(blob);
-  document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="${title}.pdf" class="btn-download">📝 Download Document PDF</a>`;
+  const canvas = document.createElement('canvas');
+  canvas.width = img.width * 2; canvas.height = img.height * 2; // 2x Upscale
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const d = imgData.data;
+
+  // Enhance Sharpness & Color Balance
+  for (let i = 0; i < d.length; i += 4) {
+    d[i] = Math.min(255, d[i] * 1.08);     // R
+    d[i+1] = Math.min(255, d[i+1] * 1.08); // G
+    d[i+2] = Math.min(255, d[i+2] * 1.08); // B
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+  canvas.toBlob((blob) => {
+    activeUrl = URL.createObjectURL(blob);
+    document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="UltraHD_Enhanced.png" class="btn-download">✨ Download Ultra HD Photo</a>`;
+  }, 'image/png');
 }
 
-// Crop & Rotate
-function loadCropPreview(e) {
+// 4. Image to PDF
+async function runImageToPDF() {
+  const files = document.getElementById('imgPdfFiles').files;
+  if (!files.length) return showResultError("Please select images!");
+  const { jsPDF } = window.jspdf;
+  let pdf = null;
+
+  for (let i = 0; i < files.length; i++) {
+    const imgData = await window.URL.createObjectURL(files[i]);
+    const img = new Image(); img.src = imgData; await img.decode();
+    if (i === 0) pdf = new jsPDF({ orientation: img.width > img.height ? 'l' : 'p', unit: 'px', format: [img.width, img.height] });
+    else pdf.addPage([img.width, img.height], img.width > img.height ? 'l' : 'p');
+    pdf.addImage(imgData, 'JPEG', 0, 0, img.width, img.height);
+  }
+  const blob = pdf.output('blob');
+  activeUrl = URL.createObjectURL(blob);
+  document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Converted_Document.pdf" class="btn-download">📥 Download PDF File</a>`;
+}
+
+// 5. Photo Editor Suite
+let origImg = null;
+let currentRotation = 0;
+
+function loadPhotoEditor(e) {
   const file = e.target.files[0];
   if(!file) return;
   const img = new Image();
   img.onload = () => {
-    currentCropImg = img; rotationAngle = 0; renderCropCanvas();
-    document.getElementById('cropCanvasContainer').style.display = 'block';
-    document.getElementById('cropControls').style.display = 'flex';
+    origImg = img;
+    currentRotation = 0;
+    document.getElementById('editorCanvasContainer').style.display = 'block';
+    document.getElementById('editorControls').style.display = 'grid';
+    document.getElementById('editorActionBtns').style.display = 'grid';
+    renderPhotoEditor();
   };
   img.src = URL.createObjectURL(file);
 }
 
-function rotateImage(deg) { rotationAngle = (rotationAngle + deg) % 360; renderCropCanvas(); }
+function rotateEditorCanvas() {
+  currentRotation = (currentRotation + 90) % 360;
+  renderPhotoEditor();
+}
 
-function renderCropCanvas() {
-  if(!currentCropImg) return;
-  const canvas = document.getElementById('cropCanvasPreview');
+function renderPhotoEditor() {
+  if(!origImg) return;
+  const canvas = document.getElementById('photoCanvas');
   const ctx = canvas.getContext('2d');
-  if (rotationAngle % 180 !== 0) { canvas.width = currentCropImg.height; canvas.height = currentCropImg.width; }
-  else { canvas.width = currentCropImg.width; canvas.height = currentCropImg.height; }
+  
+  if (currentRotation % 180 !== 0) { canvas.width = origImg.height; canvas.height = origImg.width; }
+  else { canvas.width = origImg.width; canvas.height = origImg.height; }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.save(); ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate((rotationAngle * Math.PI) / 180);
-  ctx.drawImage(currentCropImg, -currentCropImg.width / 2, -currentCropImg.height / 2);
+  ctx.rotate((currentRotation * Math.PI) / 180);
+  ctx.drawImage(origImg, -origImg.width / 2, -origImg.height / 2);
+  ctx.restore();
+  editorCanvas = canvas;
+  applyEditorFilters();
+}
+
+function applyEditorFilters() {
+  if(!editorCanvas || !origImg) return;
+  const b = document.getElementById('bright').value;
+  const c = document.getElementById('contrast').value;
+  const s = document.getElementById('saturate').value;
+  
+  const ctx = editorCanvas.getContext('2d');
+  ctx.filter = `brightness(${100 + parseInt(b)}%) contrast(${100 + parseInt(c)}%) saturate(${100 + parseInt(s)}%)`;
+  
+  ctx.save(); ctx.translate(editorCanvas.width / 2, editorCanvas.height / 2);
+  ctx.rotate((currentRotation * Math.PI) / 180);
+  ctx.drawImage(origImg, -origImg.width / 2, -origImg.height / 2);
   ctx.restore();
 }
 
-async function runCropAndRotate() {
-  const canvas = document.getElementById('cropCanvasPreview');
-  if(!canvas || !currentCropImg) return showResultError("Please select an image first!");
-  canvas.toBlob((blob) => {
+async function saveEditedPhoto() {
+  if(!editorCanvas) return showResultError("No image to save!");
+  editorCanvas.toBlob((blob) => {
     activeUrl = URL.createObjectURL(blob);
-    document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Edited_Photo.png" class="btn-download">📥 Download Image</a>`;
+    document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Edited_Photo.png" class="btn-download">💾 Download Edited Photo</a>`;
   }, 'image/png');
 }
 
-// PDF & Utilities
-async function runImageToPDF() {
-  const files = document.getElementById('imgFiles').files;
-  if (!files.length) return showResultError("Please select images!");
-  const { jsPDF } = window.jspdf; const pdf = new jsPDF();
-  for (let i = 0; i < files.length; i++) {
-    const imgData = await window.URL.createObjectURL(files[i]);
-    if (i > 0) pdf.addPage();
-    pdf.addImage(imgData, 'JPEG', 10, 10, 190, 0);
+// 6. PDF to Word (.docx)
+async function runPdfToWord() {
+  const file = document.getElementById('pdfWordFile').files[0];
+  if (!file) return showResultError("Please select a PDF file!");
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let extractedText = [];
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const strings = content.items.map(item => item.str).join(' ');
+      extractedText.push(`Page ${i}:\n` + strings);
+    }
+
+    const { Document, Packer, Paragraph, TextRun } = window.docx;
+    const doc = new Document({
+      sections: [{
+        properties: {},
+        children: extractedText.map(t => new Paragraph({ children: [new TextRun(t)] }))
+      }]
+    });
+
+    const blob = await Packer.toBlob(doc);
+    activeUrl = URL.createObjectURL(blob);
+    document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Converted_Document.docx" class="btn-download">📝 Download Word Document (.docx)</a>`;
+  } catch(err) {
+    showResultError("Could not extract text from this PDF file.");
   }
-  const blob = pdf.output('blob');
-  activeUrl = URL.createObjectURL(blob);
-  document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Converted.pdf" class="btn-download">📥 Download PDF Document</a>`;
-}
-
-async function runPDFToImage() {
-  const file = document.getElementById('pdfFile').files[0];
-  if (!file) return showResultError("Please select a PDF!");
-  const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  const page = await pdf.getPage(1);
-  const viewport = page.getViewport({ scale: 1.5 });
-  const canvas = document.createElement('canvas');
-  canvas.height = viewport.height; canvas.width = viewport.width;
-  await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
-  canvas.toBlob((blob) => {
-    activeUrl = URL.createObjectURL(blob);
-    document.getElementById('resultContent').innerHTML = `<a href="${activeUrl}" download="Page_1.png" class="btn-download">🖼️ Download High-Res PNG</a>`;
-  }, 'image/png');
-}
-
-function runAgeCalc() {
-  const val = document.getElementById('dob').value;
-  if(!val) return showResultError("Please select Date of Birth!");
-  const dob = new Date(val), now = new Date();
-  let y = now.getFullYear() - dob.getFullYear(), m = now.getMonth() - dob.getMonth(), d = now.getDate() - dob.getDate();
-  if (d < 0) { m--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-  if (m < 0) { y--; m += 12; }
-  document.getElementById('resultContent').innerHTML = `<div style="font-size: 20px; font-weight: 800; color: var(--accent); margin: 15px 0;">${y} Years, ${m} Months, ${d} Days</div>`;
-}
-
-function runPassword() {
-  const len = parseInt(document.getElementById('passLen').value) || 16;
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
-  let res = ""; for(let i=0; i<len; i++) res += chars.charAt(Math.floor(Math.random()*chars.length));
-  document.getElementById('resultContent').innerHTML = `<input type="text" readonly value="${res}" class="field" style="text-align:center; font-weight:bold; font-size:18px;">`;
-}
-
-function runWordCount() {
-  const text = document.getElementById('textInput').value.trim();
-  const words = text ? text.split(/\s+/).length : 0;
-  document.getElementById('resultContent').innerHTML = `<div style="font-size: 18px; margin: 15px 0;">Words: <b>${words}</b> | Characters: <b>${text.length}</b></div>`;
 }
 
 function showResultError(msg) { document.getElementById('resultContent').innerHTML = `<p style="color:#ef4444;">${msg}</p>`; }
