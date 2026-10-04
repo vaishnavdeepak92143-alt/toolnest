@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vaishnavdeepak92143-alt.github.io/toolnest/sitemap.xml
