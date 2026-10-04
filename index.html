@@ -1,68 +1,1343 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ToolNest — Free Online Tools</title>
-<meta name="description" content="Free online tools for text, calculators and images. Fast, simple and no signup required.">
+<meta name="description" content="Free online tools for images, PDF, text, calculators and everyday tasks. Fast, simple and mobile friendly.">
 <meta name="robots" content="index,follow">
 <style>
-:root{--bg:#f7f8fc;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--blue:#2563eb;--soft:#eef4ff;--shadow:0 8px 24px rgba(16,24,40,.06)}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}a{text-decoration:none;color:inherit}.wrap{width:min(1160px,92%);margin:auto}header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}.nav{height:70px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:25px;font-weight:900}.logo span{color:var(--blue)}.nav a{margin-left:22px;color:#475467;font-weight:600}.hero{padding:68px 0 55px;background:linear-gradient(180deg,#fff,#edf4ff)}.heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:42px;align-items:center}.badge{display:inline-block;background:#e6efff;color:var(--blue);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800}.hero h1{font-size:clamp(38px,6vw,62px);line-height:1.05;margin:15px 0}.hero h1 span{color:var(--blue)}.hero p{font-size:18px;color:var(--muted);max-width:690px}.search{width:min(700px,100%);padding:15px 17px;border:1px solid #cbd5e1;border-radius:12px;font-size:16px}.heroCard{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow)}.miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini{background:var(--soft);padding:10px;border-radius:10px;font-weight:700;font-size:14px}.section{padding:48px 0}.section h2{font-size:32px;margin:0}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:210px}.icon{font-size:28px}.card h3{margin:9px 0 5px}.card p{color:var(--muted);margin:0 0 16px}.btn{border:0;background:var(--blue);color:#fff;border-radius:10px;padding:10px 15px;font-weight:800;cursor:pointer}.btn.secondary{background:#eef2f6;color:#223047}.card .btn{margin-top:auto;width:max-content}.panel{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;margin-top:24px;box-shadow:var(--shadow)}.panel.active{display:block}.panelTop{display:flex;justify-content:space-between;gap:15px}.close{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;cursor:pointer}.field{width:100%;padding:12px;border:1px solid #ccd4e0;border-radius:10px;background:#fff;margin:7px 0 13px;font:inherit}.field:focus,.search:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}textarea.field{min-height:170px;resize:vertical}.result{margin-top:15px;background:#f5f7fa;border:1px solid var(--line);border-radius:11px;padding:15px}.actions{display:flex;gap:10px;flex-wrap:wrap}.download{display:inline-block;color:var(--blue);font-weight:800;margin-top:10px}.file{border:2px dashed #cbd5e1;border-radius:13px;padding:18px;text-align:center;background:#fbfcfe}.form2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.info{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px}.faq{display:grid;gap:12px}.faq details{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 15px}.faq summary{font-weight:800;cursor:pointer}footer{background:#fff;border-top:1px solid var(--line);padding:28px 0;color:var(--muted)}.footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}@media(max-width:850px){.heroGrid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.grid,.form2{grid-template-columns:1fr}.nav a{display:none}}
-</style></head>
+:root{
+  --bg:#f6f8fc;
+  --card:#fff;
+  --text:#111827;
+  --muted:#667085;
+  --line:#e7eaf0;
+  --blue:#2563eb;
+  --blue2:#4f46e5;
+  --soft:#eef4ff;
+  --green:#16a34a;
+  --shadow:0 8px 28px rgba(15,23,42,.07);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,92%);margin:auto}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:-.7px;
+}
+.logo span{color:var(--blue)}
+.navlinks{display:flex;gap:18px}
+.navlinks a{
+  color:#475467;
+  font-size:14px;
+  font-weight:700;
+}
+@media(max-width:600px){
+  .navlinks a:nth-child(1),
+  .navlinks a:nth-child(3){display:none}
+}
+
+/* HERO */
+.hero{
+  padding:34px 0 25px;
+  background:
+    radial-gradient(circle at 90% 0%,#dce9ff 0,transparent 35%),
+    linear-gradient(180deg,#fff,#f1f6ff);
+}
+.hero h1{
+  font-size:clamp(34px,9vw,58px);
+  line-height:1.04;
+  letter-spacing:-1.8px;
+  margin:8px 0 12px;
+}
+.hero h1 span{color:var(--blue)}
+.hero p{
+  color:var(--muted);
+  margin:0 0 20px;
+  max-width:650px;
+}
+.badge{
+  display:inline-flex;
+  padding:6px 11px;
+  border-radius:999px;
+  background:#e8f0ff;
+  color:var(--blue);
+  font-size:11px;
+  font-weight:900;
+}
+.search{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #d5dbe5;
+  border-radius:15px;
+  background:#fff;
+  outline:none;
+  box-shadow:0 4px 15px rgba(15,23,42,.04);
+}
+.search:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+
+/* FEATURED */
+.section{padding:30px 0}
+.sectionTitle{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:15px;
+}
+.sectionTitle h2{
+  margin:0;
+  font-size:23px;
+  letter-spacing:-.5px;
+}
+.sectionTitle p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+.featured{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:14px;
+}
+.feature{
+  position:relative;
+  overflow:hidden;
+  min-height:155px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:20px;
+  color:#fff;
+  box-shadow:var(--shadow);
+  transition:.25s ease;
+}
+.feature:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 35px rgba(15,23,42,.12);
+}
+.feature:active{transform:scale(.98)}
+.feature.big{
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+}
+.feature.purple{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+}
+.feature.green{
+  background:linear-gradient(135deg,#059669,#10b981);
+}
+.featureIcon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+.feature h3{
+  margin:0 0 4px;
+  font-size:19px;
+}
+.feature p{
+  margin:0;
+  opacity:.86;
+  font-size:12px;
+}
+.feature .arrow{
+  position:absolute;
+  right:17px;
+  bottom:15px;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.18);
+  border-radius:50%;
+}
+@media(max-width:700px){
+  .featured{
+    grid-template-columns:1fr 1fr;
+  }
+  .feature.big{
+    grid-column:1/-1;
+    min-height:175px;
+  }
+}
+@media(max-width:430px){
+  .featured{gap:10px}
+  .feature{padding:15px;min-height:135px}
+  .featureIcon{font-size:34px}
+}
+
+/* CATEGORY */
+.category{
+  margin-top:30px;
+}
+.categoryHead{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:13px;
+}
+.categoryHead h2{
+  font-size:19px;
+  margin:0;
+}
+.categoryDot{
+  width:9px;
+  height:9px;
+  background:var(--blue);
+  border-radius:50%;
+}
+
+/* MOBILE APP ICON GRID */
+.toolsGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
+}
+.tool{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:18px;
+  padding:13px 7px 12px;
+  min-width:0;
+  min-height:112px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  box-shadow:0 4px 14px rgba(15,23,42,.035);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.tool:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 24px rgba(15,23,42,.09);
+  border-color:#cbd8f8;
+}
+.tool:active{transform:scale(.94)}
+.toolIcon{
+  width:49px;
+  height:49px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  font-size:25px;
+  margin-bottom:8px;
+  background:var(--soft);
+}
+.tool:nth-child(4n+2) .toolIcon{background:#f3e8ff}
+.tool:nth-child(4n+3) .toolIcon{background:#ecfdf3}
+.tool:nth-child(4n+4) .toolIcon{background:#fff7ed}
+.toolName{
+  font-size:11px;
+  line-height:1.25;
+  font-weight:800;
+}
+@media(max-width:350px){
+  .toolsGrid{gap:7px}
+  .tool{padding:10px 4px;min-height:105px}
+  .toolIcon{width:44px;height:44px;font-size:22px}
+  .toolName{font-size:10px}
+}
+
+/* PANELS */
+.panel{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:20px;
+  margin-top:25px;
+  box-shadow:var(--shadow);
+}
+.panel.active{
+  display:block;
+  animation:panelIn .32s ease both;
+}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(18px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.panelTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+}
+.panel h2{margin:0 0 5px;font-size:23px}
+.close{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:7px 10px;
+}
+.field{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd4e0;
+  border-radius:11px;
+  background:#fff;
+  margin:7px 0 13px;
+  outline:none;
+}
+.field:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+textarea.field{min-height:160px;resize:vertical}
+.btn{
+  border:0;
+  background:var(--blue);
+  color:#fff;
+  border-radius:11px;
+  padding:11px 16px;
+  font-weight:800;
+}
+.btn.secondary{
+  background:#eef2f6;
+  color:#223047;
+}
+.actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+.result{
+  margin-top:14px;
+  background:#f6f8fb;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+}
+.file{
+  border:2px dashed #cbd5e1;
+  border-radius:14px;
+  padding:18px;
+  text-align:center;
+  background:#fbfcfe;
+}
+.download{
+  display:inline-block;
+  color:var(--blue);
+  font-weight:800;
+  margin-top:10px;
+}
+.form2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:500px){
+  .form2{grid-template-columns:1fr}
+}
+
+/* INFO */
+.info{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+.info h2{margin-top:0}
+.muted{color:var(--muted)}
+.faq{display:grid;gap:10px}
+.faq details{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px 15px;
+}
+.faq summary{font-weight:800;cursor:pointer}
+
+/* FOOTER */
+footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:25px 0;
+  color:var(--muted);
+}
+.footer{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  font-size:13px;
+}
+.footerLinks{
+  display:flex;
+  gap:15px;
+}
+.footerLinks a:hover{color:var(--blue)}
+</style>
+</head>
+
 <body>
-<header><div class="wrap nav"><a class="logo" href="#"><span>Tool</span>Nest</a><nav><a href="#tools">Tools</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a><a href="#faq">FAQ</a></nav></div></header>
-<section class="hero"><div class="wrap heroGrid"><div><span class="badge">FREE • FAST • NO SIGNUP</span><h1>Useful tools for <span>everyday work.</span></h1><p>Free browser-based tools for writing, calculations and images. Simple to use on phone or desktop.</p><input id="search" class="search" placeholder="Search tools..." aria-label="Search tools"></div><div class="heroCard"><h3>Popular tools</h3><div class="miniGrid"><div class="mini">✍️ Word Counter</div><div class="mini">🖼️ Image Compressor</div><div class="mini">%</div><div class="mini">📏 Unit Converter</div></div></div></div></section>
-<section id="tools" class="section"><div class="wrap"><h2>Free Online Tools</h2><p class="muted">Useful tools you can use instantly.</p><div id="cards" class="grid">
-<article class="card" data-tags="word text writing character"><div class="icon">✍️</div><h3>Word Counter</h3><p>Count words, characters and sentences.</p><button class="btn" onclick="openTool('word')">Open Tool</button></article>
-<article class="card" data-tags="character counter text"><div class="icon">🔤</div><h3>Character Counter</h3><p>Count characters with and without spaces.</p><button class="btn" onclick="openTool('word')">Open Tool</button></article>
-<article class="card" data-tags="case converter uppercase lowercase title"><div class="icon">Aa</div><h3>Case Converter</h3><p>Upper, lower, title and sentence case.</p><button class="btn" onclick="openTool('case')">Open Tool</button></article>
-<article class="card" data-tags="duplicate lines remove text"><div class="icon">🧹</div><h3>Duplicate Line Remover</h3><p>Remove repeated lines from text.</p><button class="btn" onclick="openTool('dup')">Open Tool</button></article>
-<article class="card" data-tags="spaces text clean"><div class="icon">🧽</div><h3>Extra Spaces Remover</h3><p>Clean repeated spaces and blank lines.</p><button class="btn" onclick="openTool('spaces')">Open Tool</button></article>
-<article class="card" data-tags="sort lines list text"><div class="icon">↕️</div><h3>Line Sorter</h3><p>Sort lines from A–Z or Z–A.</p><button class="btn" onclick="openTool('sort')">Open Tool</button></article>
-<article class="card" data-tags="slug url seo text"><div class="icon">🔗</div><h3>Slug Generator</h3><p>Create simple URL slugs from titles.</p><button class="btn" onclick="openTool('slug')">Open Tool</button></article>
-<article class="card" data-tags="percentage percent calculator math"><div class="icon">%</div><h3>Percentage Calculator</h3><p>Calculate a percentage of a number.</p><button class="btn" onclick="openTool('percent')">Open Tool</button></article>
-<article class="card" data-tags="percentage change math"><div class="icon">📈</div><h3>Percentage Change</h3><p>Calculate increase or decrease.</p><button class="btn" onclick="openTool('change')">Open Tool</button></article>
-<article class="card" data-tags="discount sale shopping calculator"><div class="icon">🏷️</div><h3>Discount Calculator</h3><p>Calculate savings and final price.</p><button class="btn" onclick="openTool('discount')">Open Tool</button></article>
-<article class="card" data-tags="age birthday date calculator"><div class="icon">🎂</div><h3>Age Calculator</h3><p>Calculate exact age from a date of birth.</p><button class="btn" onclick="openTool('age')">Open Tool</button></article>
-<article class="card" data-tags="bmi calculator height weight"><div class="icon">⚖️</div><h3>BMI Calculator</h3><p>Calculate BMI from height and weight.</p><button class="btn" onclick="openTool('bmi')">Open Tool</button></article>
-<article class="card" data-tags="tip bill restaurant calculator"><div class="icon">💵</div><h3>Tip Calculator</h3><p>Calculate tip and split a bill.</p><button class="btn" onclick="openTool('tip')">Open Tool</button></article>
-<article class="card" data-tags="unit converter length weight temperature"><div class="icon">📏</div><h3>Unit Converter</h3><p>Convert length, weight and temperature.</p><button class="btn" onclick="openTool('unit')">Open Tool</button></article>
-<article class="card" data-tags="random number generator"><div class="icon">🎲</div><h3>Random Number Generator</h3><p>Generate random integers in a range.</p><button class="btn" onclick="openTool('random')">Open Tool</button></article>
-<article class="card" data-tags="password generator security"><div class="icon">🔐</div><h3>Password Generator</h3><p>Generate a strong random password locally.</p><button class="btn" onclick="openTool('password')">Open Tool</button></article>
-<article class="card" data-tags="image compress compressor jpg png webp"><div class="icon">🗜️</div><h3>Image Compressor</h3><p>Compress an image in your browser.</p><button class="btn" onclick="openTool('compress')">Open Tool</button></article>
-<article class="card" data-tags="image resize photo"><div class="icon">↔️</div><h3>Image Resizer</h3><p>Resize images to exact dimensions.</p><button class="btn" onclick="openTool('resize')">Open Tool</button></article>
-<article class="card" data-tags="image converter jpg png webp"><div class="icon">🖼️</div><h3>Image Format Converter</h3><p>Convert JPG, PNG and WebP locally.</p><button class="btn" onclick="openTool('format')">Open Tool</button></article>
-</div>
-<div id="word" class="panel"><div class="panelTop"><div><h2>Word & Character Counter</h2><p class="muted">Type or paste your text.</p></div><button class="close" onclick="closeTools()">✕</button></div><textarea id="wordText" class="field" placeholder="Enter text..."></textarea><div class="result">Words: <b id="wcWords">0</b> · Characters: <b id="wcChars">0</b> · No spaces: <b id="wcNo">0</b> · Sentences: <b id="wcSent">0</b></div></div>
-<div id="case" class="panel"><div class="panelTop"><h2>Case Converter</h2><button class="close" onclick="closeTools()">✕</button></div><textarea id="caseText" class="field" placeholder="Enter text..."></textarea><select id="caseType" class="field"><option value="upper">UPPERCASE</option><option value="lower">lowercase</option><option value="title">Title Case</option><option value="sentence">Sentence case</option></select><div class="actions"><button class="btn" onclick="convertCase()">Convert</button><button class="btn secondary" onclick="copy('caseResult')">Copy</button></div><textarea id="caseResult" class="field" readonly placeholder="Result..."></textarea></div>
-<div id="dup" class="panel"><div class="panelTop"><h2>Duplicate Line Remover</h2><button class="close" onclick="closeTools()">✕</button></div><textarea id="dupText" class="field" placeholder="One item per line..."></textarea><button class="btn" onclick="removeDup()">Remove Duplicates</button><textarea id="dupResult" class="field" readonly placeholder="Result..."></textarea></div>
-<div id="spaces" class="panel"><div class="panelTop"><h2>Extra Spaces Remover</h2><button class="close" onclick="closeTools()">✕</button></div><textarea id="spaceText" class="field" placeholder="Enter text..."></textarea><button class="btn" onclick="cleanSpaces()">Clean Text</button><textarea id="spaceResult" class="field" readonly></textarea></div>
-<div id="sort" class="panel"><div class="panelTop"><h2>Line Sorter</h2><button class="close" onclick="closeTools()">✕</button></div><textarea id="sortText" class="field" placeholder="One item per line..."></textarea><div class="actions"><button class="btn" onclick="sortLines(true)">A → Z</button><button class="btn secondary" onclick="sortLines(false)">Z → A</button></div><textarea id="sortResult" class="field" readonly></textarea></div>
-<div id="slug" class="panel"><div class="panelTop"><h2>Slug Generator</h2><button class="close" onclick="closeTools()">✕</button></div><input id="slugText" class="field" placeholder="Best Free Online Tools"><button class="btn" onclick="makeSlug()">Generate Slug</button><input id="slugResult" class="field" readonly></div>
-<div id="percent" class="panel"><div class="panelTop"><h2>Percentage Calculator</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>X %<input id="pX" class="field" type="number"></label><label>Of Y<input id="pY" class="field" type="number"></label></div><button class="btn" onclick="percent()">Calculate</button><div id="pOut" class="result"></div></div>
-<div id="change" class="panel"><div class="panelTop"><h2>Percentage Change</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>Old<input id="old" class="field" type="number"></label><label>New<input id="new" class="field" type="number"></label></div><button class="btn" onclick="change()">Calculate</button><div id="changeOut" class="result"></div></div>
-<div id="discount" class="panel"><div class="panelTop"><h2>Discount Calculator</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>Original price<input id="price" class="field" type="number"></label><label>Discount %<input id="disc" class="field" type="number"></label></div><button class="btn" onclick="discount()">Calculate</button><div id="discOut" class="result"></div></div>
-<div id="age" class="panel"><div class="panelTop"><h2>Age Calculator</h2><button class="close" onclick="closeTools()">✕</button></div><label>Date of birth<input id="dob" class="field" type="date"></label><button class="btn" onclick="age()">Calculate Age</button><div id="ageOut" class="result"></div></div>
-<div id="bmi" class="panel"><div class="panelTop"><h2>BMI Calculator</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>Height (cm)<input id="height" class="field" type="number"></label><label>Weight (kg)<input id="weight" class="field" type="number"></label></div><button class="btn" onclick="bmi()">Calculate BMI</button><div id="bmiOut" class="result"></div></div>
-<div id="tip" class="panel"><div class="panelTop"><h2>Tip Calculator</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>Bill<input id="bill" class="field" type="number"></label><label>Tip %<input id="tipPct" class="field" type="number" value="10"></label><label>People<input id="people" class="field" type="number" value="1"></label></div><button class="btn" onclick="tip()">Calculate</button><div id="tipOut" class="result"></div></div>
-<div id="unit" class="panel"><div class="panelTop"><h2>Unit Converter</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>Value<input id="uv" class="field" type="number"></label><label>Category<select id="ucat" class="field" onchange="units()"><option value="length">Length</option><option value="weight">Weight</option><option value="temperature">Temperature</option></select></label><label>From<select id="ufrom" class="field"></select></label><label>To<select id="uto" class="field"></select></label></div><button class="btn" onclick="convertUnit()">Convert</button><div id="uout" class="result"></div></div>
-<div id="random" class="panel"><div class="panelTop"><h2>Random Number Generator</h2><button class="close" onclick="closeTools()">✕</button></div><div class="form2"><label>Minimum<input id="rmin" class="field" type="number" value="1"></label><label>Maximum<input id="rmax" class="field" type="number" value="100"></label></div><button class="btn" onclick="randomNum()">Generate</button><div id="rout" class="result"></div></div>
-<div id="password" class="panel"><div class="panelTop"><h2>Password Generator</h2><button class="close" onclick="closeTools()">✕</button></div><label>Length<input id="plen" class="field" type="number" min="6" max="64" value="16"></label><button class="btn" onclick="password()">Generate Password</button><input id="pout" class="field" readonly></div>
-<div id="compress" class="panel"><div class="panelTop"><h2>Image Compressor</h2><button class="close" onclick="closeTools()">✕</button></div><div class="file"><input id="cfile" type="file" accept="image/*"></div><label>Quality<input id="quality" type="range" min="10" max="100" value="75"></label><div id="qshow" class="muted">Quality: 75%</div><button class="btn" onclick="compress()">Compress</button><div id="cout" class="result"></div></div>
-<div id="resize" class="panel"><div class="panelTop"><h2>Image Resizer</h2><button class="close" onclick="closeTools()">✕</button></div><div class="file"><input id="rfile" type="file" accept="image/*"></div><div class="form2"><label>Width<input id="rw" class="field" type="number"></label><label>Height<input id="rh" class="field" type="number"></label></div><button class="btn" onclick="resizeImage()">Resize</button><div id="rsizeout" class="result"></div></div>
-<div id="format" class="panel"><div class="panelTop"><h2>Image Format Converter</h2><button class="close" onclick="closeTools()">✕</button></div><div class="file"><input id="ffile" type="file" accept="image/*"></div><select id="ftype" class="field"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option></select><button class="btn" onclick="formatImage()">Convert</button><div id="fout" class="result"></div></div>
-</div></div></section>
-<section id="about" class="section"><div class="wrap"><div class="info"><h2>About ToolNest</h2><p>ToolNest is a collection of simple browser-based utilities for writing, calculations and images. The goal is to make everyday tasks quick and easy without requiring an account.</p><p class="muted">Image tools on this page process selected images in your browser.</p></div></div></section>
-<section id="faq" class="section"><div class="wrap"><h2>Frequently Asked Questions</h2><div class="faq" style="margin-top:18px"><details><summary>Are the tools free?</summary><p>Yes. These tools are provided for free.</p></details><details><summary>Do I need to sign up?</summary><p>No signup is required for the tools currently on the site.</p></details><details><summary>Are images uploaded?</summary><p>The image utilities use browser-side processing and do not intentionally upload files to a ToolNest server.</p></details><details><summary>Does ToolNest work on phones?</summary><p>Yes, the layout is responsive for modern mobile and desktop browsers.</p></details></div></div></section>
-<footer><div class="wrap footer"><span>© 2026 ToolNest</span><span>Free Online Tools</span><span><a href="about.html">About</a> · <a href="privacy.html">Privacy Policy</a> · <a href="contact.html">Contact</a></span></div></footer>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span>Tool</span>Nest</a>
+    <nav class="navlinks">
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="badge">FREE • FAST • MOBILE FRIENDLY</span>
+    <h1>Simple tools for <span>everyday work.</span></h1>
+    <p>Convert, calculate, edit and organize your files and text directly in your browser.</p>
+    <input id="search" class="search" placeholder="🔎 Search a tool..." aria-label="Search tools">
+  </div>
+</section>
+
+<main class="wrap">
+
+<section class="section">
+  <div class="sectionTitle">
+    <div>
+      <h2>✨ Popular Tools</h2>
+      <p>Quick access to useful tools</p>
+    </div>
+  </div>
+
+  <div class="featured">
+
+    <button class="feature big" onclick="openTool('pdf')">
+      <div class="featureIcon">📄</div>
+      <h3>Image to PDF</h3>
+      <p>Convert your photos into a PDF instantly.</p>
+      <span class="arrow">→</span>
+    </button>
+
+    <button class="feature purple" onclick="openTool('removebg')">
+      <div class="featureIcon">✨</div>
+      <h3>Background Remover</h3>
+      <p>Remove simple backgrounds locally.</p>
+      <span class="arrow">→</span>
+    </button>
+
+    <button class="feature green" onclick="openTool('enhance')">
+      <div class="featureIcon">🌟</div>
+      <h3>Photo Enhancer</h3>
+      <p>Improve brightness and contrast.</p>
+      <span class="arrow">→</span>
+    </button>
+
+  </div>
+</section>
+
+<section id="tools">
+
+  <div class="category">
+    <div class="categoryHead">
+      <span class="categoryDot"></span>
+      <h2>Image Tools</h2>
+    </div>
+
+    <div id="imageTools" class="toolsGrid">
+
+      <button class="tool" data-tags="image pdf photo convert" onclick="openTool('pdf')">
+        <span class="toolIcon">📄</span>
+        <span class="toolName">Image to PDF</span>
+      </button>
+
+      <button class="tool" data-tags="background remove image" onclick="openTool('removebg')">
+        <span class="toolIcon">✨</span>
+        <span class="toolName">Remove BG</span>
+      </button>
+
+      <button class="tool" data-tags="jpg png converter image" onclick="openTool('format')">
+        <span class="toolIcon">🖼️</span>
+        <span class="toolName">JPG to PNG</span>
+      </button>
+
+      <button class="tool" data-tags="photo enhance image" onclick="openTool('enhance')">
+        <span class="toolIcon">🌟</span>
+        <span class="toolName">Photo Enhance</span>
+      </button>
+
+      <button class="tool" data-tags="compress image photo" onclick="openTool('compress')">
+        <span class="toolIcon">🗜️</span>
+        <span class="toolName">Compress</span>
+      </button>
+
+      <button class="tool" data-tags="resize image photo" onclick="openTool('resize')">
+        <span class="toolIcon">↔️</span>
+        <span class="toolName">Resize Image</span>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="categoryHead">
+      <span class="categoryDot"></span>
+      <h2>Text Tools</h2>
+    </div>
+
+    <div class="toolsGrid">
+
+      <button class="tool" data-tags="word counter text" onclick="openTool('word')">
+        <span class="toolIcon">✍️</span>
+        <span class="toolName">Word Counter</span>
+      </button>
+
+      <button class="tool" data-tags="character counter" onclick="openTool('word')">
+        <span class="toolIcon">🔤</span>
+        <span class="toolName">Characters</span>
+      </button>
+
+      <button class="tool" data-tags="case converter uppercase lowercase" onclick="openTool('case')">
+        <span class="toolIcon">Aa</span>
+        <span class="toolName">Case Converter</span>
+      </button>
+
+      <button class="tool" data-tags="duplicate lines remove" onclick="openTool('dup')">
+        <span class="toolIcon">🧹</span>
+        <span class="toolName">Remove Duplicates</span>
+      </button>
+
+      <button class="tool" data-tags="spaces clean text" onclick="openTool('spaces')">
+        <span class="toolIcon">🧽</span>
+        <span class="toolName">Clean Spaces</span>
+      </button>
+
+      <button class="tool" data-tags="sort lines text" onclick="openTool('sort')">
+        <span class="toolIcon">↕️</span>
+        <span class="toolName">Line Sorter</span>
+      </button>
+
+      <button class="tool" data-tags="slug seo url" onclick="openTool('slug')">
+        <span class="toolIcon">🔗</span>
+        <span class="toolName">Slug Maker</span>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="categoryHead">
+      <span class="categoryDot"></span>
+      <h2>Calculator Tools</h2>
+    </div>
+
+    <div class="toolsGrid">
+
+      <button class="tool" data-tags="percentage calculator" onclick="openTool('percent')">
+        <span class="toolIcon">%</span>
+        <span class="toolName">Percentage</span>
+      </button>
+
+      <button class="tool" data-tags="percentage change" onclick="openTool('change')">
+        <span class="toolIcon">📈</span>
+        <span class="toolName">Percent Change</span>
+      </button>
+
+      <button class="tool" data-tags="discount calculator" onclick="openTool('discount')">
+        <span class="toolIcon">🏷️</span>
+        <span class="toolName">Discount</span>
+      </button>
+
+      <button class="tool" data-tags="age birthday calculator" onclick="openTool('age')">
+        <span class="toolIcon">🎂</span>
+        <span class="toolName">Age Calculator</span>
+      </button>
+
+      <button class="tool" data-tags="bmi health calculator" onclick="openTool('bmi')">
+        <span class="toolIcon">⚖️</span>
+        <span class="toolName">BMI</span>
+      </button>
+
+      <button class="tool" data-tags="tip bill calculator" onclick="openTool('tip')">
+        <span class="toolIcon">💵</span>
+        <span class="toolName">Tip Calculator</span>
+      </button>
+
+      <button class="tool" data-tags="unit converter length weight" onclick="openTool('unit')">
+        <span class="toolIcon">📏</span>
+        <span class="toolName">Unit Converter</span>
+      </button>
+
+      <button class="tool" data-tags="random number" onclick="openTool('random')">
+        <span class="toolIcon">🎲</span>
+        <span class="toolName">Random Number</span>
+      </button>
+
+      <button class="tool" data-tags="password security generator" onclick="openTool('password')">
+        <span class="toolIcon">🔐</span>
+        <span class="toolName">Password</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- PANELS -->
+
+  <div id="pdf" class="panel">
+    <div class="panelTop">
+      <div>
+        <h2>📄 Image to PDF</h2>
+        <p class="muted">Select one or more images and create a PDF.</p>
+      </div>
+      <button class="close" onclick="closeTools()">✕</button>
+    </div>
+    <div class="file">
+      <input id="pdfFiles" type="file" accept="image/*" multiple>
+    </div>
+    <button class="btn" onclick="makePDF()">Create PDF</button>
+    <div id="pdfOut" class="result"></div>
+  </div>
+
+  <div id="removebg" class="panel">
+    <div class="panelTop">
+      <div>
+        <h2>✨ Background Remover</h2>
+        <p class="muted">Works best with a plain/light background.</p>
+      </div>
+      <button class="close" onclick="closeTools()">✕</button>
+    </div>
+    <div class="file">
+      <input id="bgFile" type="file" accept="image/*">
+    </div>
+    <button class="btn" onclick="removeBackground()">Remove Background</button>
+    <div id="bgOut" class="result"></div>
+  </div>
+
+  <div id="enhance" class="panel">
+    <div class="panelTop">
+      <div>
+        <h2>🌟 Photo Enhancer</h2>
+        <p class="muted">Adjust brightness, contrast and saturation.</p>
+      </div>
+      <button class="close" onclick="closeTools()">✕</button>
+    </div>
+    <div class="file">
+      <input id="enhanceFile" type="file" accept="image/*">
+    </div>
+    <label>Brightness
+      <input id="brightness" class="field" type="range" min="70" max="140" value="105">
+    </label>
+    <label>Contrast
+      <input id="contrast" class="field" type="range" min="70" max="140" value="110">
+    </label>
+    <label>Saturation
+      <input id="saturation" class="field" type="range" min="70" max="150" value="110">
+    </label>
+    <button class="btn" onclick="enhanceImage()">Enhance Photo</button>
+    <div id="enhanceOut" class="result"></div>
+  </div>
+
+  <div id="word" class="panel">
+    <div class="panelTop">
+      <div><h2>✍️ Word & Character Counter</h2></div>
+      <button class="close" onclick="closeTools()">✕</button>
+    </div>
+    <textarea id="wordText" class="field" placeholder="Enter text..."></textarea>
+    <div class="result">
+      Words: <b id="wcWords">0</b> ·
+      Characters: <b id="wcChars">0</b> ·
+      No spaces: <b id="wcNo">0</b> ·
+      Sentences: <b id="wcSent">0</b>
+    </div>
+  </div>
+
+  <div id="case" class="panel">
+    <div class="panelTop"><h2>🔤 Case Converter</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <textarea id="caseText" class="field" placeholder="Enter text..."></textarea>
+    <select id="caseType" class="field">
+      <option value="upper">UPPERCASE</option>
+      <option value="lower">lowercase</option>
+      <option value="title">Title Case</option>
+      <option value="sentence">Sentence case</option>
+    </select>
+    <div class="actions">
+      <button class="btn" onclick="convertCase()">Convert</button>
+      <button class="btn secondary" onclick="copyText('caseResult')">Copy</button>
+    </div>
+    <textarea id="caseResult" class="field" readonly placeholder="Result..."></textarea>
+  </div>
+
+  <div id="dup" class="panel">
+    <div class="panelTop"><h2>🧹 Duplicate Line Remover</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <textarea id="dupText" class="field" placeholder="One item per line..."></textarea>
+    <button class="btn" onclick="removeDup()">Remove Duplicates</button>
+    <textarea id="dupResult" class="field" readonly></textarea>
+  </div>
+
+  <div id="spaces" class="panel">
+    <div class="panelTop"><h2>🧽 Extra Spaces Remover</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <textarea id="spaceText" class="field" placeholder="Enter text..."></textarea>
+    <button class="btn" onclick="cleanSpaces()">Clean Text</button>
+    <textarea id="spaceResult" class="field" readonly></textarea>
+  </div>
+
+  <div id="sort" class="panel">
+    <div class="panelTop"><h2>↕️ Line Sorter</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <textarea id="sortText" class="field" placeholder="One item per line..."></textarea>
+    <div class="actions">
+      <button class="btn" onclick="sortLines(true)">A → Z</button>
+      <button class="btn secondary" onclick="sortLines(false)">Z → A</button>
+    </div>
+    <textarea id="sortResult" class="field" readonly></textarea>
+  </div>
+
+  <div id="slug" class="panel">
+    <div class="panelTop"><h2>🔗 Slug Generator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <input id="slugText" class="field" placeholder="Best Free Online Tools">
+    <button class="btn" onclick="makeSlug()">Generate Slug</button>
+    <input id="slugResult" class="field" readonly>
+  </div>
+
+  <div id="percent" class="panel">
+    <div class="panelTop"><h2>% Percentage Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>X %<input id="pX" class="field" type="number"></label>
+      <label>Of Y<input id="pY" class="field" type="number"></label>
+    </div>
+    <button class="btn" onclick="percent()">Calculate</button>
+    <div id="pOut" class="result"></div>
+  </div>
+
+  <div id="change" class="panel">
+    <div class="panelTop"><h2>📈 Percentage Change</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>Old<input id="old" class="field" type="number"></label>
+      <label>New<input id="new" class="field" type="number"></label>
+    </div>
+    <button class="btn" onclick="change()">Calculate</button>
+    <div id="changeOut" class="result"></div>
+  </div>
+
+  <div id="discount" class="panel">
+    <div class="panelTop"><h2>🏷️ Discount Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>Original price<input id="price" class="field" type="number"></label>
+      <label>Discount %<input id="disc" class="field" type="number"></label>
+    </div>
+    <button class="btn" onclick="discount()">Calculate</button>
+    <div id="discOut" class="result"></div>
+  </div>
+
+  <div id="age" class="panel">
+    <div class="panelTop"><h2>🎂 Age Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <label>Date of birth<input id="dob" class="field" type="date"></label>
+    <button class="btn" onclick="age()">Calculate Age</button>
+    <div id="ageOut" class="result"></div>
+  </div>
+
+  <div id="bmi" class="panel">
+    <div class="panelTop"><h2>⚖️ BMI Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>Height (cm)<input id="height" class="field" type="number"></label>
+      <label>Weight (kg)<input id="weight" class="field" type="number"></label>
+    </div>
+    <button class="btn" onclick="bmi()">Calculate BMI</button>
+    <div id="bmiOut" class="result"></div>
+  </div>
+
+  <div id="tip" class="panel">
+    <div class="panelTop"><h2>💵 Tip Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>Bill<input id="bill" class="field" type="number"></label>
+      <label>Tip %<input id="tipPct" class="field" type="number" value="10"></label>
+      <label>People<input id="people" class="field" type="number" value="1"></label>
+    </div>
+    <button class="btn" onclick="tip()">Calculate</button>
+    <div id="tipOut" class="result"></div>
+  </div>
+
+  <div id="unit" class="panel">
+    <div class="panelTop"><h2>📏 Unit Converter</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>Value<input id="uv" class="field" type="number"></label>
+      <label>Category
+        <select id="ucat" class="field" onchange="units()">
+          <option value="length">Length</option>
+          <option value="weight">Weight</option>
+          <option value="temperature">Temperature</option>
+        </select>
+      </label>
+      <label>From<select id="ufrom" class="field"></select></label>
+      <label>To<select id="uto" class="field"></select></label>
+    </div>
+    <button class="btn" onclick="convertUnit()">Convert</button>
+    <div id="uout" class="result"></div>
+  </div>
+
+  <div id="random" class="panel">
+    <div class="panelTop"><h2>🎲 Random Number Generator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form2">
+      <label>Minimum<input id="rmin" class="field" type="number" value="1"></label>
+      <label>Maximum<input id="rmax" class="field" type="number" value="100"></label>
+    </div>
+    <button class="btn" onclick="randomNum()">Generate</button>
+    <div id="rout" class="result"></div>
+  </div>
+
+  <div id="password" class="panel">
+    <div class="panelTop"><h2>🔐 Password Generator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <label>Length<input id="plen" class="field" type="number" min="6" max="64" value="16"></label>
+    <button class="btn" onclick="passwordGen()">Generate Password</button>
+    <input id="pout" class="field" readonly>
+  </div>
+
+  <div id="compress" class="panel">
+    <div class="panelTop"><h2>🗜️ Image Compressor</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="file"><input id="cfile" type="file" accept="image/*"></div>
+    <label>Quality
+      <input id="quality" type="range" min="10" max="100" value="75">
+    </label>
+    <div id="qshow" class="muted">Quality: 75%</div>
+    <button class="btn" onclick="compress()">Compress</button>
+    <div id="cout" class="result"></div>
+  </div>
+
+  <div id="resize" class="panel">
+    <div class="panelTop"><h2>↔️ Image Resizer</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="file"><input id="rfile" type="file" accept="image/*"></div>
+    <div class="form2">
+      <label>Width<input id="rw" class="field" type="number"></label>
+      <label>Height<input id="rh" class="field" type="number"></label>
+    </div>
+    <button class="btn" onclick="resizeImage()">Resize</button>
+    <div id="rsizeout" class="result"></div>
+  </div>
+
+</section>
+
+<section id="about" class="section">
+  <div class="info">
+    <h2>About ToolNest</h2>
+    <p>ToolNest is a collection of simple browser-based utilities for writing, calculations, images and everyday tasks.</p>
+    <p class="muted">Many image tools process selected files directly in your browser.</p>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq" style="margin-top:15px">
+    <details>
+      <summary>Are the tools free?</summary>
+      <p>Yes. ToolNest provides these tools for free.</p>
+    </details>
+    <details>
+      <summary>Do I need an account?</summary>
+      <p>No signup is required for the current tools.</p>
+    </details>
+    <details>
+      <summary>Are my images uploaded?</summary>
+      <p>The image utilities are designed to process selected images in your browser.</p>
+    </details>
+    <details>
+      <summary>Does ToolNest work on phones?</summary>
+      <p>Yes. ToolNest uses a mobile-first responsive layout.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer">
+    <span>© 2026 ToolNest</span>
+    <div class="footerLinks">
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-const $=id=>document.getElementById(id);function openTool(id){closeTools();$(id).classList.add('active');$(id).scrollIntoView({behavior:'smooth',block:'center'})}function closeTools(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))}function copy(id){navigator.clipboard.writeText($(id).value)}
-$('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('#cards .card').forEach(c=>c.style.display=!q||c.dataset.tags.includes(q)?'flex':'none')});
-$('wordText').addEventListener('input',()=>{const t=$('wordText').value;$('wcWords').textContent=(t.trim().match(/\S+/g)||[]).length;$('wcChars').textContent=t.length;$('wcNo').textContent=t.replace(/\s/g,'').length;$('wcSent').textContent=(t.match(/[.!?]+(?=\s|$)/g)||[]).length});
-function convertCase(){let t=$('caseText').value,r=t,x=$('caseType').value;if(x==='upper')r=t.toUpperCase();else if(x==='lower')r=t.toLowerCase();else if(x==='title')r=t.toLowerCase().replace(/\b[A-Za-z]/g,c=>c.toUpperCase());else r=t.toLowerCase().replace(/(^|[.!?]\s+)[a-z]/g,m=>m.toUpperCase());$('caseResult').value=r}function removeDup(){const seen=new Set(),o=[];$('dupText').value.split(/\r?\n/).forEach(x=>{const k=x.trim();if(k&&!seen.has(k)){seen.add(k);o.push(x)}});$('dupResult').value=o.join('\n')}function cleanSpaces(){$('spaceResult').value=$('spaceText').value.replace(/[ \t]+/g,' ').replace(/\n[ \t]*/g,'\n').replace(/\n{3,}/g,'\n\n').trim()}function sortLines(a){const x=$('sortText').value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);x.sort((p,q)=>a?p.localeCompare(q,undefined,{numeric:true,sensitivity:'base'}):q.localeCompare(p,undefined,{numeric:true,sensitivity:'base'}));$('sortResult').value=x.join('\n')}function makeSlug(){$('slugResult').value=$('slugText').value.toLowerCase().trim().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'')}
-const n=id=>parseFloat($(id).value);function percent(){const a=n('pX'),b=n('pY');$('pOut').innerHTML=isFinite(a)&&isFinite(b)?`<b>${a}% of ${b} = ${b*a/100}</b>`:'Enter valid values.'}function change(){const a=n('old'),b=n('new');$('changeOut').innerHTML=isFinite(a)&&isFinite(b)&&a!==0?`Change: <b>${(((b-a)/Math.abs(a))*100).toFixed(2)}%</b>`:'Enter valid values; old value cannot be 0.'}function discount(){const p=n('price'),d=n('disc');if(!isFinite(p)||!isFinite(d)){$('discOut').textContent='Enter valid values.';return}const s=p*d/100;$('discOut').innerHTML=`Save: <b>${s.toFixed(2)}</b> · Final price: <b>${(p-s).toFixed(2)}</b>`}function age(){const v=$('dob').value;if(!v){$('ageOut').textContent='Select a date.';return}const d=new Date(v+'T00:00:00'),now=new Date();let y=now.getFullYear()-d.getFullYear(),m=now.getMonth()-d.getMonth(),day=now.getDate()-d.getDate();if(day<0){m--;day+=new Date(now.getFullYear(),now.getMonth(),0).getDate()}if(m<0){y--;m+=12}$('ageOut').innerHTML=`Age: <b>${y} years, ${m} months, ${day} days</b>`}function bmi(){const h=n('height')/100,w=n('weight');if(!(h>0&&w>0)){$('bmiOut').textContent='Enter valid height and weight.';return}$('bmiOut').innerHTML=`BMI: <b>${(w/(h*h)).toFixed(1)}</b>`}function tip(){const b=n('bill'),p=n('tipPct'),pp=parseInt($('people').value,10)||1;if(!(b>=0&&p>=0)){$('tipOut').textContent='Enter valid values.';return}const t=b*p/100;$('tipOut').innerHTML=`Tip: <b>${t.toFixed(2)}</b> · Total: <b>${(b+t).toFixed(2)}</b> · Per person: <b>${((b+t)/pp).toFixed(2)}</b>`}
-const U={length:{meter:1,kilometer:1000,centimeter:.01,millimeter:.001,mile:1609.344,foot:.3048,inch:.0254},weight:{kilogram:1,gram:.001,milligram:.000001,pound:.45359237,ounce:.0283495231},temperature:{celsius:0,fahrenheit:0,kelvin:0}};function units(){const c=$('ucat').value,a=Object.keys(U[c]);$('ufrom').innerHTML=$('uto').innerHTML=a.map(x=>`<option>${x}</option>`).join('')}units();function convertUnit(){const v=n('uv'),c=$('ucat').value,f=$('ufrom').value,t=$('uto').value;if(!isFinite(v)){$('uout').textContent='Enter a number.';return}let r;if(c==='temperature'){const cc=f==='celsius'?v:f==='fahrenheit'?(v-32)*5/9:v-273.15;r=t==='celsius'?cc:t==='fahrenheit'?cc*9/5+32:cc+273.15}else r=v*U[c][f]/U[c][t];$('uout').innerHTML=`Result: <b>${Number(r.toFixed(8))} ${t}</b>`}function randomNum(){const a=parseInt($('rmin').value),b=parseInt($('rmax').value);$('rout').innerHTML=Number.isInteger(a)&&Number.isInteger(b)&&a<=b?`Random number: <b>${Math.floor(Math.random()*(b-a+1))+a}</b>`:'Enter valid range.'}function password(){const l=Math.min(64,Math.max(6,parseInt($('plen').value)||16)),c='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=',arr=new Uint32Array(l);crypto.getRandomValues(arr);let s='';for(let i=0;i<l;i++)s+=c[arr[i]%c.length];$('pout').value=s}
-$('quality').addEventListener('input',e=>$('qshow').textContent='Quality: '+e.target.value+'%');function img(file,cb){if(!file){cb(null);return}const i=new Image();i.onload=()=>cb(i);i.onerror=()=>cb(null);i.src=URL.createObjectURL(file)}function compress(){const f=$('cfile').files[0];if(!f){$('cout').textContent='Select an image.';return}img(f,i=>{const s=Math.min(1,2200/i.width,2200/i.height),c=document.createElement('canvas');c.width=Math.round(i.width*s);c.height=Math.round(i.height*s);c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(b=>{const u=URL.createObjectURL(b);$('cout').innerHTML=`Original: <b>${(f.size/1024).toFixed(1)} KB</b> · New: <b>${(b.size/1024).toFixed(1)} KB</b><br><a class="download" download="toolnest-compressed.jpg" href="${u}">Download compressed image →</a>`},'image/jpeg',n('quality')/100)})}function resizeImage(){const f=$('rfile').files[0],w=parseInt($('rw').value),h=parseInt($('rh').value);if(!f||!w||!h){$('rsizeout').textContent='Choose an image and dimensions.';return}img(f,i=>{const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(i,0,0,w,h);c.toBlob(b=>{const u=URL.createObjectURL(b);$('rsizeout').innerHTML=`New size: <b>${w} × ${h}</b><br><a class="download" download="toolnest-resized.png" href="${u}">Download resized image →</a>`},'image/png')})}function formatImage(){const f=$('ffile').files[0],t=$('ftype').value;if(!f){$('fout').textContent='Select an image.';return}img(f,i=>{const c=document.createElement('canvas');c.width=i.width;c.height=i.height;c.getContext('2d').drawImage(i,0,0);const ext=t==='image/png'?'png':t==='image/webp'?'webp':'jpg';c.toBlob(b=>{const u=URL.createObjectURL(b);$('fout').innerHTML=`Converted to <b>${ext.toUpperCase()}</b><br><a class="download" download="toolnest-converted.${ext}" href="${u}">Download converted image →</a>`},t,.92)})}
+const $=id=>document.getElementById(id);
+
+function openTool(id){
+  closeTools();
+  const panel=$(id);
+  if(!panel)return;
+  panel.classList.add('active');
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'center'}),30);
+}
+
+function closeTools(){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+}
+
+function copyText(id){
+  navigator.clipboard.writeText($(id).value);
+}
+
+/* SEARCH */
+$('search').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.tool').forEach(c=>{
+    const tags=(c.dataset.tags||'').toLowerCase();
+    const name=c.querySelector('.toolName').textContent.toLowerCase();
+    c.style.display=(!q||tags.includes(q)||name.includes(q))?'flex':'none';
+  });
+});
+
+/* WORD COUNTER */
+$('wordText').addEventListener('input',()=>{
+  const t=$('wordText').value;
+  $('wcWords').textContent=(t.trim().match(/\S+/g)||[]).length;
+  $('wcChars').textContent=t.length;
+  $('wcNo').textContent=t.replace(/\s/g,'').length;
+  $('wcSent').textContent=(t.match(/[.!?]+(?=\s|$)/g)||[]).length;
+});
+
+/* CASE */
+function convertCase(){
+  let t=$('caseText').value;
+  const x=$('caseType').value;
+  let r=t;
+  if(x==='upper')r=t.toUpperCase();
+  else if(x==='lower')r=t.toLowerCase();
+  else if(x==='title')r=t.toLowerCase().replace(/\b[A-Za-z]/g,c=>c.toUpperCase());
+  else r=t.toLowerCase().replace(/(^|[.!?]\s+)[a-z]/g,m=>m.toUpperCase());
+  $('caseResult').value=r;
+}
+
+/* DUPLICATES */
+function removeDup(){
+  const seen=new Set(),o=[];
+  $('dupText').value.split(/\r?\n/).forEach(x=>{
+    const k=x.trim();
+    if(k&&!seen.has(k)){seen.add(k);o.push(x)}
+  });
+  $('dupResult').value=o.join('\n');
+}
+
+/* SPACES */
+function cleanSpaces(){
+  $('spaceResult').value=$('spaceText').value
+    .replace(/[ \t]+/g,' ')
+    .replace(/\n[ \t]*/g,'\n')
+    .replace(/\n{3,}/g,'\n\n')
+    .trim();
+}
+
+/* SORT */
+function sortLines(a){
+  const x=$('sortText').value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  x.sort((p,q)=>a?p.localeCompare(q,undefined,{numeric:true,sensitivity:'base'}):q.localeCompare(p,undefined,{numeric:true,sensitivity:'base'}));
+  $('sortResult').value=x.join('\n');
+}
+
+/* SLUG */
+function makeSlug(){
+  $('slugResult').value=$('slugText').value.toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g,'')
+    .replace(/\s+/g,'-')
+    .replace(/-+/g,'-')
+    .replace(/^-|-$/g,'');
+}
+
+/* CALCULATORS */
+const n=id=>parseFloat($(id).value);
+
+function percent(){
+  const a=n('pX'),b=n('pY');
+  $('pOut').innerHTML=isFinite(a)&&isFinite(b)
+    ? `<b>${a}% of ${b} = ${b*a/100}</b>`
+    :'Enter valid values.';
+}
+
+function change(){
+  const a=n('old'),b=n('new');
+  $('changeOut').innerHTML=isFinite(a)&&isFinite(b)&&a!==0
+    ? `Change: <b>${(((b-a)/Math.abs(a))*100).toFixed(2)}%</b>`
+    :'Enter valid values; old value cannot be 0.';
+}
+
+function discount(){
+  const p=n('price'),d=n('disc');
+  if(!isFinite(p)||!isFinite(d)){
+    $('discOut').textContent='Enter valid values.';
+    return;
+  }
+  const s=p*d/100;
+  $('discOut').innerHTML=`Save: <b>${s.toFixed(2)}</b> · Final price: <b>${(p-s).toFixed(2)}</b>`;
+}
+
+function age(){
+  const v=$('dob').value;
+  if(!v){$('ageOut').textContent='Select a date.';return}
+  const d=new Date(v+'T00:00:00'),now=new Date();
+  let y=now.getFullYear()-d.getFullYear();
+  let m=now.getMonth()-d.getMonth();
+  let day=now.getDate()-d.getDate();
+  if(day<0){
+    m--;
+    day+=new Date(now.getFullYear(),now.getMonth(),0).getDate();
+  }
+  if(m<0){y--;m+=12}
+  $('ageOut').innerHTML=`Age: <b>${y} years, ${m} months, ${day} days</b>`;
+}
+
+function bmi(){
+  const h=n('height')/100,w=n('weight');
+  if(!(h>0&&w>0)){
+    $('bmiOut').textContent='Enter valid height and weight.';
+    return;
+  }
+  $('bmiOut').innerHTML=`BMI: <b>${(w/(h*h)).toFixed(1)}</b>`;
+}
+
+function tip(){
+  const b=n('bill'),p=n('tipPct'),pp=parseInt($('people').value,10)||1;
+  if(!(b>=0&&p>=0)){
+    $('tipOut').textContent='Enter valid values.';
+    return;
+  }
+  const t=b*p/100;
+  $('tipOut').innerHTML=`Tip: <b>${t.toFixed(2)}</b> · Total: <b>${(b+t).toFixed(2)}</b> · Per person: <b>${((b+t)/pp).toFixed(2)}</b>`;
+}
+
+/* UNIT */
+const U={
+  length:{meter:1,kilometer:1000,centimeter:.01,millimeter:.001,mile:1609.344,foot:.3048,inch:.0254},
+  weight:{kilogram:1,gram:.001,milligram:.000001,pound:.45359237,ounce:.0283495231},
+  temperature:{celsius:0,fahrenheit:0,kelvin:0}
+};
+
+function units(){
+  const c=$('ucat').value;
+  const a=Object.keys(U[c]);
+  $('ufrom').innerHTML=a.map(x=>`<option>${x}</option>`).join('');
+  $('uto').innerHTML=a.map(x=>`<option>${x}</option>`).join('');
+}
+
+units();
+
+function convertUnit(){
+  const v=n('uv'),c=$('ucat').value,f=$('ufrom').value,t=$('uto').value;
+  if(!isFinite(v)){
+    $('uout').textContent='Enter a number.';
+    return;
+  }
+  let r;
+  if(c==='temperature'){
+    const cc=f==='celsius'?v:f==='fahrenheit'?(v-32)*5/9:v-273.15;
+    r=t==='celsius'?cc:t==='fahrenheit'?cc*9/5+32:cc+273.15;
+  }else{
+    r=v*U[c][f]/U[c][t];
+  }
+  $('uout').innerHTML=`Result: <b>${Number(r.toFixed(8))} ${t}</b>`;
+}
+
+/* RANDOM */
+function randomNum(){
+  const a=parseInt($('rmin').value),b=parseInt($('rmax').value);
+  $('rout').innerHTML=Number.isInteger(a)&&Number.isInteger(b)&&a<=b
+    ? `Random number: <b>${Math.floor(Math.random()*(b-a+1))+a}</b>`
+    :'Enter valid range.';
+}
+
+/* PASSWORD */
+function passwordGen(){
+  const l=Math.min(64,Math.max(6,parseInt($('plen').value)||16));
+  const c='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=';
+  const arr=new Uint32Array(l);
+  crypto.getRandomValues(arr);
+  let s='';
+  for(let i=0;i<l;i++)s+=c[arr[i]%c.length];
+  $('pout').value=s;
+}
+
+/* IMAGE HELPER */
+function loadImage(file,cb){
+  if(!file){cb(null);return}
+  const i=new Image();
+  i.onload=()=>cb(i);
+  i.onerror=()=>cb(null);
+  i.src=URL.createObjectURL(file);
+}
+
+/* IMAGE COMPRESS */
+$('quality').addEventListener('input',e=>{
+  $('qshow').textContent='Quality: '+e.target.value+'%';
+});
+
+function compress(){
+  const f=$('cfile').files[0];
+  if(!f){$('cout').textContent='Select an image.';return}
+  loadImage(f,i=>{
+    if(!i){$('cout').textContent='Could not read image.';return}
+    const s=Math.min(1,2200/i.width,2200/i.height);
+    const c=document.createElement('canvas');
+    c.width=Math.round(i.width*s);
+    c.height=Math.round(i.height*s);
+    c.getContext('2d').drawImage(i,0,0,c.width,c.height);
+    c.toBlob(b=>{
+      const u=URL.createObjectURL(b);
+      $('cout').innerHTML=`Original: <b>${(f.size/1024).toFixed(1)} KB</b> · New: <b>${(b.size/1024).toFixed(1)} KB</b><br>
+      <a class="download" download="toolnest-compressed.jpg" href="${u}">Download compressed image →</a>`;
+    },'image/jpeg',n('quality')/100);
+  });
+}
+
+/* RESIZE */
+function resizeImage(){
+  const f=$('rfile').files[0],w=parseInt($('rw').value),h=parseInt($('rh').value);
+  if(!f||!w||!h){
+    $('rsizeout').textContent='Choose an image and dimensions.';
+    return;
+  }
+  loadImage(f,i=>{
+    const c=document.createElement('canvas');
+    c.width=w;c.height=h;
+    c.getContext('2d').drawImage(i,0,0,w,h);
+    c.toBlob(b=>{
+      const u=URL.createObjectURL(b);
+      $('rsizeout').innerHTML=`New size: <b>${w} × ${h}</b><br>
+      <a class="download" download="toolnest-resized.png" href="${u}">Download resized image →</a>`;
+    },'image/png');
+  });
+}
+
+/* FORMAT */
+function formatImage(){
+  const f=$('ffile')?.files[0];
+  const t=$('ftype')?.value;
+  if(!f)return;
+}
+
+/* IMAGE TO PDF
+   Creates a simple PDF directly in the browser.
+*/
+function makePDF(){
+  const files=[...($('pdfFiles').files||[])];
+  if(!files.length){
+    $('pdfOut').textContent='Select one or more images.';
+    return;
+  }
+
+  Promise.all(files.map(file=>new Promise(resolve=>{
+    loadImage(file,resolve);
+  }))).then(images=>{
+    images=images.filter(Boolean);
+    if(!images.length){
+      $('pdfOut').textContent='Could not read the selected images.';
+      return;
+    }
+
+    /*
+      Minimal PDF writer.
+      Each image is converted to JPEG and placed on its own page.
+    */
+    const pages=[];
+    let objects=[];
+    let offsets=[];
+    let pdf='%PDF-1.4\n';
+
+    function addObject(body){
+      objects.push(body);
+      return objects.length;
+    }
+
+    const catalogId=addObject('');
+    const pagesId=addObject('');
+
+    images.forEach((img,index)=>{
+      const maxW=595,maxH=842;
+      const scale=Math.min(maxW/img.width,maxH/img.height,1);
+      const w=Math.round(img.width*scale);
+      const h=Math.round(img.height*scale);
+
+      const canvas=document.createElement('canvas');
+      canvas.width=img.width;
+      canvas.height=img.height;
+      canvas.getContext('2d').drawImage(img,0,0);
+
+      const data=canvas.toDataURL('image/jpeg',.9).split(',')[1];
+      const binary=atob(data);
+
+      const imgId=addObject({
+        type:'image',
+        data:binary,
+        width:img.width,
+        height:img.height
+      });
+
+      const content=`q\n${w} 0 0 ${h} ${(maxW-w)/2} ${(maxH-h)/2} cm\n/Im${index+1} Do\nQ`;
+      const contentId=addObject(content);
+
+      const pageId=addObject({
+        type:'page',
+        width:maxW,
+        height:maxH,
+        imageId:imgId,
+        contentId:contentId,
+        index:index+1
+      });
+
+      pages.push(pageId);
+    });
+
+    objects[catalogId-1]=`<< /Type /Catalog /Pages ${pagesId} 0 R >>`;
+    objects[pagesId-1]=`<< /Type /Pages /Kids [${pages.map(x=>x+' 0 R').join(' ')}] /Count ${pages.length} >>`;
+
+    const objectText=[];
+    objects.forEach((obj,i)=>{
+      offsets[i+1]=pdf.length;
+      pdf+=(i+1)+' 0 obj\n';
+
+      if(typeof obj==='string'){
+        if(obj.startsWith('q\n')){
+          pdf=`${pdf}<< /Length ${obj.length} >>\nstream\n${obj}\nendstream\nendobj\n`;
+        }else{
+          pdf+=obj+'\nendobj\n';
+        }
+      }else if(obj.type==='image'){
+        const bin=obj.data;
+        pdf+=`<< /Type /XObject /Subtype /Image /Width ${obj.width} /Height ${obj.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${bin.length} >>\nstream\n`;
+        pdf+=bin;
+        pdf+='\nendstream\nendobj\n';
+      }else if(obj.type==='page'){
+        pdf+=`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${obj.width} ${obj.height}] /Resources << /XObject << /Im${obj.index} ${obj.imageId} 0 R >> >> /Contents ${obj.contentId} 0 R >>\nendobj\n`;
+      }
+    });
+
+    const xref=pdf.length;
+    pdf+='xref\n0 '+(objects.length+1)+'\n';
+    pdf+='0000000000 65535 f \n';
+    for(let i=1;i<=objects.length;i++){
+      pdf+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+    }
+    pdf+='trailer\n';
+    pdf+=`<< /Size ${objects.length+1} /Root ${catalogId} 0 R >>\n`;
+    pdf+='startxref\n'+xref+'\n%%EOF';
+
+    const blob=new Blob([pdf],{type:'application/pdf'});
+    const url=URL.createObjectURL(blob);
+
+    $('pdfOut').innerHTML=`
+      <b>PDF created successfully!</b><br>
+      ${images.length} image${images.length>1?'s':''} added.
+      <br>
+      <a class="download" download="toolnest-images.pdf" href="${url}">Download PDF →</a>
+    `;
+  });
+}
+
+/* SIMPLE BACKGROUND REMOVER
+   Removes pixels similar to the top-left corner color.
+   Best for plain backgrounds.
+*/
+function removeBackground(){
+  const f=$('bgFile').files[0];
+  if(!f){
+    $('bgOut').textContent='Select an image.';
+    return;
+  }
+
+  loadImage(f,img=>{
+    if(!img){
+      $('bgOut').textContent='Could not read image.';
+      return;
+    }
+
+    const c=document.createElement('canvas');
+    c.width=img.width;
+    c.height=img.height;
+    const ctx=c.getContext('2d');
+    ctx.drawImage(img,0,0);
+
+    const data=ctx.getImageData(0,0,c.width,c.height);
+    const d=data.data;
+
+    const r0=d[0],g0=d[1],b0=d[2];
+    const threshold=55;
+
+    for(let i=0;i<d.length;i+=4){
+      const dist=Math.sqrt(
+        Math.pow(d[i]-r0,2)+
+        Math.pow(d[i+1]-g0,2)+
+        Math.pow(d[i+2]-b0,2)
+      );
+
+      if(dist<threshold)d[i+3]=0;
+    }
+
+    ctx.putImageData(data,0,0);
+
+    c.toBlob(blob=>{
+      const url=URL.createObjectURL(blob);
+      $('bgOut').innerHTML=`
+        <b>Background processed!</b><br>
+        <a class="download" download="toolnest-background-removed.png" href="${url}">Download PNG →</a>
+      `;
+    },'image/png');
+  });
+}
+
+/* PHOTO ENHANCER */
+function enhanceImage(){
+  const f=$('enhanceFile').files[0];
+  if(!f){
+    $('enhanceOut').textContent='Select an image.';
+    return;
+  }
+
+  loadImage(f,img=>{
+    const c=document.createElement('canvas');
+    c.width=img.width;
+    c.height=img.height;
+
+    const ctx=c.getContext('2d');
+    ctx.filter=
+      `brightness(${$('brightness').value}%)
+       contrast(${$('contrast').value}%)
+       saturate(${$('saturation').value}%)`;
+
+    ctx.drawImage(img,0,0);
+
+    c.toBlob(blob=>{
+      const url=URL.createObjectURL(blob);
+      $('enhanceOut').innerHTML=`
+        <b>Photo enhanced!</b><br>
+        <a class="download" download="toolnest-enhanced.jpg" href="${url}">Download enhanced photo →</a>
+      `;
+    },'image/jpeg',.92);
+  });
+}
 </script>
-<section id="about" class="section"><div class="wrap"><div class="info"><h2>About ToolNest</h2><p>ToolNest is a collection of simple browser-based utilities for writing, calculations and images. No account is required for the current tools.</p><p class="muted">Image tools process selected files in your browser.</p></div></div></section>
-<section id="faq" class="section"><div class="wrap"><h2>Frequently Asked Questions</h2><div class="faq" style="margin-top:18px"><details><summary>Are the tools free?</summary><p>Yes. ToolNest is designed as a free online tools website.</p></details><details><summary>Do I need an account?</summary><p>No signup is required for the current tools.</p></details><details><summary>Are images uploaded?</summary><p>The image utilities process selected images in your browser and do not intentionally upload them to a ToolNest server.</p></details></div></div></section>
-<footer><div class="wrap footer"><span>© 2026 ToolNest</span><span>Free Online Tools</span></div></footer></body></html>
+
+</body>
+</html>
+```
